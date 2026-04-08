@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">The Cocoa Logo</title>
+  <desc id="logoDesc">Layered blue trapezoid icon with The Cocoa wordmark</desc>
+
+  <rect width="180" height="180" fill="#ffffff"/>
+
+  <g transform="translate(0,8)">
+    <polygon points="74,18 106,18 102,26 78,26" fill="#f2e400"/>
+    <polygon points="70,26 110,26 104,40 76,40" fill="#8ec4e9"/>
+    <polygon points="64,40 116,40 108,56 72,56" fill="#9d8fd0"/>
+    <polygon points="56,56 124,56 114,74 66,74" fill="#5b92cf"/>
+    <polygon points="48,74 132,74 120,94 60,94" fill="#1f4ea1"/>
+  </g>
+
+  <text
+    x="90"
+    y="145"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="40"
+    font-weight="600"
+    letter-spacing="1.2"
+    fill="#385b9d"
+  >
+    The Cocoa
+  </text>
+</svg>

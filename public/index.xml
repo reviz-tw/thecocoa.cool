@@ -1,1 +1,67 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>THE COCOA</title><link>https://example.github.io/thecocoa.cool/</link><description>Recent content on THE COCOA</description><generator>Hugo</generator><language>zh-tw</language><lastBuildDate>Sun, 15 Dec 2024 12:00:00 +0000</lastBuildDate><atom:link href="https://example.github.io/thecocoa.cool/index.xml" rel="self" type="application/rss+xml"/><item><title>為何傳統民調在 2024 年失去了魔法？</title><link>https://example.github.io/thecocoa.cool/posts/deep-analysis/</link><pubDate>Sun, 15 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/deep-analysis/</guid><description>分析數位時代下資訊同溫層如何干擾抽樣準確度，以及大數據預測的崛起與挑戰。</description></item><item><title>數據故事：被遺忘的角落</title><link>https://example.github.io/thecocoa.cool/posts/society/</link><pubDate>Sun, 01 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/society/</guid><description>在數據的地圖上，有些地方永遠是一片空白。我們走入這些被演算法忽略的邊緣地帶，記錄真實的生存樣態。</description></item><item><title>視覺專題：全球經濟地形圖</title><link>https://example.github.io/thecocoa.cool/posts/economy/</link><pubDate>Fri, 15 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/economy/</guid><description>重新定義國界的不再是政治，而是資金的流向與科技的供應鏈。我們繪製了二十一世紀的新商業版圖。</description></item><item><title>互動圖表：勞動力結構轉型</title><link>https://example.github.io/thecocoa.cool/posts/labor/</link><pubDate>Fri, 01 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/labor/</guid><description>探索 AI 浪潮如何重塑全球五大產業的職能需求與薪資結構，揭開自動化時代的職場真相。</description></item><item><title>氣候變遷下的高山生態</title><link>https://example.github.io/thecocoa.cool/posts/climate/</link><pubDate>Tue, 01 Oct 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/climate/</guid><description>隨著全球氣溫上升，高山植被線正在以前所未有的速度向上遷移，這對脆弱的生物多樣性意味著什麼？</description></item><item><title>數據解碼：城市發展的脈動</title><link>https://example.github.io/thecocoa.cool/posts/city/</link><pubDate>Sun, 01 Sep 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/city/</guid><description>透過數百萬筆即使數據，我們剖析了現代都市如何在繁華與擁擠之間找到生存的平衡點。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>THE COCOA</title><link>https://example.github.io/thecocoa.cool/</link><description>Recent content on THE COCOA</description><generator>Hugo</generator><language>zh-tw</language><lastBuildDate>Sun, 15 Dec 2024 12:00:00 +0000</lastBuildDate><atom:link href="https://example.github.io/thecocoa.cool/index.xml" rel="self" type="application/rss+xml"/><item><title>為何傳統民調在 2024 年失去了魔法？</title><link>https://example.github.io/thecocoa.cool/posts/deep-analysis/</link><pubDate>Sun, 15 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/deep-analysis/</guid><description>分析數位時代下資訊同溫層如何干擾抽樣準確度，以及大數據預測的崛起與挑戰。</description></item><item><title>數據故事：被遺忘的角落</title><link>https://example.github.io/thecocoa.cool/posts/society/</link><pubDate>Sun, 01 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/society/</guid><description>在數據的地圖上，有些地方永遠是一片空白。我們走入這些被演算法忽略的邊緣地帶，記錄真實的生存樣態。</description></item><item><title>視覺專題：全球經濟地形圖</title><link>https://example.github.io/thecocoa.cool/posts/economy/</link><pubDate>Fri, 15 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/economy/</guid><description>重新定義國界的不再是政治，而是資金的流向與科技的供應鏈。我們繪製了二十一世紀的新商業版圖。</description></item><item><title>互動圖表：勞動力結構轉型</title><link>https://example.github.io/thecocoa.cool/posts/labor/</link><pubDate>Fri, 01 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/labor/</guid><description>探索 AI 浪潮如何重塑全球五大產業的職能需求與薪資結構，揭開自動化時代的職場真相。</description></item><item><title>氣候變遷下的高山生態</title><link>https://example.github.io/thecocoa.cool/posts/climate/</link><pubDate>Tue, 01 Oct 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/climate/</guid><description>隨著全球氣溫上升，高山植被線正在以前所未有的速度向上遷移，這對脆弱的生物多樣性意味著什麼？</description></item><item><title>數據解碼：城市發展的脈動</title><link>https://example.github.io/thecocoa.cool/posts/city/</link><pubDate>Sun, 01 Sep 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/city/</guid><description>透過數百萬筆即使數據，我們剖析了現代都市如何在繁華與擁擠之間找到生存的平衡點。</description></item><item><title>PODCAST</title><link>https://example.github.io/thecocoa.cool/podcast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/podcast/</guid><description>&lt;p>這是 &lt;code>PODCAST&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>最新集數&lt;/li>
+&lt;li>節目分類&lt;/li>
+&lt;li>平台收聽連結&lt;/li>
+&lt;/ul></description></item><item><title>加入我們</title><link>https://example.github.io/thecocoa.cool/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/contact/</guid><description>&lt;p>這是 &lt;code>加入我們&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>職缺資訊&lt;/li>
+&lt;li>投稿與合作方式&lt;/li>
+&lt;li>聯絡信箱與表單&lt;/li>
+&lt;/ul></description></item><item><title>影音</title><link>https://example.github.io/thecocoa.cool/video/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/video/</guid><description>&lt;p>這是 &lt;code>影音&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>影片報導&lt;/li>
+&lt;li>專題短片&lt;/li>
+&lt;li>直播與回放整理&lt;/li>
+&lt;/ul></description></item><item><title>數據來源聲明</title><link>https://example.github.io/thecocoa.cool/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/data/</guid><description>&lt;p>這是 &lt;code>數據來源聲明&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>建議你在這裡補上：&lt;/p>
+&lt;ul>
+&lt;li>資料來源列表&lt;/li>
+&lt;li>清理與分析方法&lt;/li>
+&lt;li>更新頻率與限制說明&lt;/li>
+&lt;/ul></description></item><item><title>最愛</title><link>https://example.github.io/thecocoa.cool/favorites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/favorites/</guid><description>&lt;p>這是 &lt;code>最愛&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>使用者收藏文章&lt;/li>
+&lt;li>編輯精選清單&lt;/li>
+&lt;li>推薦閱讀集合&lt;/li>
+&lt;/ul></description></item><item><title>最新</title><link>https://example.github.io/thecocoa.cool/latest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/latest/</guid><description>&lt;p>這是 &lt;code>最新&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>最新發布文章列表&lt;/li>
+&lt;li>依時間排序的快訊&lt;/li>
+&lt;li>編輯推薦新內容&lt;/li>
+&lt;/ul></description></item><item><title>服務條款</title><link>https://example.github.io/thecocoa.cool/terms/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/terms/</guid><description>&lt;p>這是 &lt;code>服務條款&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>建議你在這裡補上：&lt;/p>
+&lt;ul>
+&lt;li>使用規範&lt;/li>
+&lt;li>內容授權與限制&lt;/li>
+&lt;li>免責聲明&lt;/li>
+&lt;/ul></description></item><item><title>熱門</title><link>https://example.github.io/thecocoa.cool/hot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/hot/</guid><description>&lt;p>這是 &lt;code>熱門&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>近 24 小時熱門文章&lt;/li>
+&lt;li>近 7 日討論度最高主題&lt;/li>
+&lt;li>社群分享排行&lt;/li>
+&lt;/ul></description></item><item><title>觀點</title><link>https://example.github.io/thecocoa.cool/opinions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/opinions/</guid><description>&lt;p>這是 &lt;code>觀點&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>專欄與社論&lt;/li>
+&lt;li>作者觀點文章&lt;/li>
+&lt;li>議題評論彙整&lt;/li>
+&lt;/ul></description></item><item><title>關於 THE COCOA</title><link>https://example.github.io/thecocoa.cool/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/about/</guid><description>&lt;p>這是 &lt;code>關於我們&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>你可以在這裡放：&lt;/p>
+&lt;ul>
+&lt;li>品牌理念&lt;/li>
+&lt;li>團隊介紹&lt;/li>
+&lt;li>發展里程碑&lt;/li>
+&lt;/ul></description></item><item><title>隱私權政策</title><link>https://example.github.io/thecocoa.cool/privacy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/privacy/</guid><description>&lt;p>這是 &lt;code>隱私權政策&lt;/code> 的預設頁面。&lt;/p>
+&lt;p>建議你在這裡補上：&lt;/p>
+&lt;ul>
+&lt;li>資料蒐集類型&lt;/li>
+&lt;li>使用目的與保存期限&lt;/li>
+&lt;li>使用者權利與聯絡窗口&lt;/li>
+&lt;/ul></description></item></channel></rss>

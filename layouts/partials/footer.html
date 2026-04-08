@@ -1,7 +1,9 @@
 <footer style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4rem; padding: 4rem 2rem; color: var(--text-muted);">
   <div class="container" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2rem;">
     <div>
-      <div class="logo" style="margin-bottom: 1rem; color: var(--text-main);">THE COCOA</div>
+      <a href="{{ "" | relURL }}" class="logo-link footer-logo" aria-label="The Cocoa 首頁">
+        <img src="{{ "images/logo.svg" | relURL }}" alt="The Cocoa" class="logo-img footer-logo-img">
+      </a>
       <p style="font-size: 0.875rem;">以數據為核心，洞察世界脈動的新型態媒體。</p>
     </div>
     <div>
