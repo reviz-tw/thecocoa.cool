@@ -1,0 +1,41 @@
+baseURL = 'https://thecocoa.cool/'
+languageCode = 'zh-tw'
+title = 'THE COCOA'
+
+[pagination]
+  pagerSize = 10
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "A modern, high-end, data-driven news website."
+  author = "THE COCOA Team"
+
+[menus]
+  [[menus.main]]
+    name = "最愛"
+    url = "/favorites/"
+    weight = 10
+  [[menus.main]]
+    name = "熱門"
+    url = "/hot/"
+    weight = 20
+  [[menus.main]]
+    name = "最新"
+    url = "/latest/"
+    weight = 30
+  [[menus.main]]
+    name = "觀點"
+    url = "/opinions/"
+    weight = 40
+  [[menus.main]]
+    name = "影音"
+    url = "/video/"
+    weight = 50
+  [[menus.main]]
+    name = "PODCAST"
+    url = "/podcast/"
+    weight = 60
