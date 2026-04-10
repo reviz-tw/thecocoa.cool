@@ -1,16 +1,16 @@
 {{ define "main" }}
 <article class="static-rich">
-  <header class="static-rich-hero">
+  <div class="static-rich-hero">
     <p class="static-rich-kicker">THE COCOA</p>
     <h1 class="static-rich-title">{{ .Title }}</h1>
     {{ with .Description }}
     <p class="static-rich-subtitle">{{ . }}</p>
     {{ end }}
-  </header>
-  <section class="static-rich-panel">
+  </div>
+  <div class="static-rich-panel">
     <div class="static-rich-content">
       {{ .Content }}
     </div>
-  </section>
+  </div>
 </article>
 {{ end }}
