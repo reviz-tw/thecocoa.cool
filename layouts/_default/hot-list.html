@@ -1,0 +1,64 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $sorted := sort $posts "Params.views" "desc" }}
+
+<div class="section-head">
+  <h1 class="section-title">{{ .Title }}</h1>
+  <p class="section-desc">{{ .Description }}</p>
+</div>
+
+<!-- Top 3 hero ranking -->
+{{ $top := first 3 $sorted }}
+<div class="hot-podium">
+  {{ range $i, $p := $top }}
+  <a href="{{ $p.RelPermalink }}" class="hot-podium-card {{ if eq $i 0 }}hot-podium-first{{ end }}">
+    <div class="hot-rank hot-rank-{{ add $i 1 }}">{{ add $i 1 }}</div>
+    <div class="hot-podium-img">
+      {{ if $p.Params.image }}
+      <img src="{{ $p.Params.image }}" alt="{{ $p.Title }}" loading="lazy">
+      {{ else }}
+      <div class="card-img-placeholder"></div>
+      {{ end }}
+      <span class="tag on-img">{{ $p.Params.category | default "報導" }}</span>
+    </div>
+    <div class="hot-podium-body">
+      <h2 class="card-title">{{ $p.Title }}</h2>
+      <p class="card-excerpt">{{ $p.Summary | plainify | truncate 80 }}</p>
+      <div class="hot-views">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        {{ $p.Params.views | default 0 }} 次閱讀
+      </div>
+    </div>
+  </a>
+  {{ end }}
+</div>
+
+<!-- Ranked list for the rest -->
+{{ $rest := after 3 $sorted }}
+{{ if $rest }}
+<div class="hot-list">
+  {{ range $i, $p := $rest }}
+  <a href="{{ $p.RelPermalink }}" class="hot-row">
+    <span class="hot-row-rank">{{ add $i 4 }}</span>
+    <div class="hot-row-thumb">
+      {{ if $p.Params.image }}
+      <img src="{{ $p.Params.image }}" alt="{{ $p.Title }}" loading="lazy">
+      {{ else }}
+      <div class="card-img-placeholder" style="width:100%;height:100%;"></div>
+      {{ end }}
+    </div>
+    <div class="hot-row-body">
+      <span class="tag">{{ $p.Params.category | default "報導" }}</span>
+      <h3 class="hot-row-title">{{ $p.Title }}</h3>
+      <span class="card-date">{{ $p.Date.Format "2006年1月2日" }}</span>
+    </div>
+    <div class="hot-row-views">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      {{ $p.Params.views | default 0 }}
+    </div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ end }}

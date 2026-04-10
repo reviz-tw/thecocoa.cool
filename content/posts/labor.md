@@ -3,6 +3,7 @@ title: "互動圖表：勞動力結構轉型"
 date: 2024-11-01T12:00:00Z
 category: "勞動市場"
 card_type: "interactive"
+views: 9300
 summary: "探索 AI 浪潮如何重塑全球五大產業的職能需求與薪資結構，揭開自動化時代的職場真相。"
 ---
 這是一個含有複雜 HTML 與互動圖表的特殊網頁！

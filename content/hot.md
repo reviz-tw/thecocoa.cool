@@ -1,13 +1,6 @@
 +++
-title = "熱門"
-description = "熱門內容頁面範本。"
+title = "熱門文章"
+description = "本週閱讀數最高的文章排行。"
+layout = "hot-list"
 draft = false
 +++
-
-這是 `熱門` 的預設頁面。
-
-你可以在這裡放：
-
-- 近 24 小時熱門文章
-- 近 7 日討論度最高主題
-- 社群分享排行

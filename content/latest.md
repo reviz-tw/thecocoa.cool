@@ -1,13 +1,6 @@
 +++
-title = "最新"
-description = "最新文章頁面範本。"
+title = "最新文章"
+description = "依發布時間排列，掌握最新報導。"
+layout = "latest-list"
 draft = false
 +++
-
-這是 `最新` 的預設頁面。
-
-你可以在這裡放：
-
-- 最新發布文章列表
-- 依時間排序的快訊
-- 編輯推薦新內容
