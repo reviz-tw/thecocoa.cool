@@ -1,51 +1,52 @@
 {{ define "main" }}
-<div class="article-grid">
+<div class="cards-grid">
   {{ range .Pages }}
   {{ if eq .Params.card_type "deep-analysis" }}
-    <!-- Deep Analysis Card -->
-    <a href="{{ .RelPermalink }}" class="card card-special">
-      <div class="card-tag">深度分析</div>
+    <!-- Deep Analysis / Feature Yellow Card -->
+    <a href="{{ .RelPermalink }}" class="article-card card-feature-yellow">
+      <div class="tag">深度分析</div>
       <h2 class="card-title">{{ .Title }}</h2>
-      <p class="card-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
-      <div class="card-special-cta">
-        閱讀完整報告 
+      <p class="card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
+      <div class="card-cta">
+        閱讀完整報告
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </div>
     </a>
 
   {{ else if eq .Params.card_type "interactive" }}
-    <!-- Interactive Card -->
-    <a href="{{ .RelPermalink }}" class="card">
+    <!-- Interactive / Feature Blue Card -->
+    <a href="{{ .RelPermalink }}" class="article-card card-feature-blue">
       <div class="card-graphic-wrap">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle><circle cx="12" cy="4" r="2"></circle></svg>
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(116,177,245,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle><circle cx="12" cy="4" r="2"></circle><line x1="12" y1="8" x2="12" y2="8"></line><line x1="8.59" y1="16.59" x2="6" y2="16"></line><line x1="15.41" y1="16.59" x2="18" y2="16"></line></svg>
       </div>
-      <div class="card-content">
+      <div class="card-body">
         <div class="card-meta">
-          <span class="card-tag accent">{{ .Params.category | default "圖表" }}</span>
+          <span class="tag tag-blue">{{ .Params.category | default "互動圖表" }}</span>
           <span class="card-date">{{ .Date.Format "2006年1月" }}</span>
         </div>
         <h2 class="card-title">{{ .Title }}</h2>
-        <p class="card-excerpt">{{ .Summary | plainify | truncate 60 }}</p>
+        <p class="card-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
       </div>
     </a>
 
   {{ else }}
-    <!-- Default Card -->
-    <a href="{{ .RelPermalink }}" class="card">
-      <div class="card-image-wrap">
+    <!-- Default Article Card -->
+    <a href="{{ .RelPermalink }}" class="article-card">
+      <div class="card-img">
         {{ if .Params.image }}
-        <img src="{{ .Params.image }}" alt="{{ .Title }}">
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
         {{ else }}
-        <div style="width: 100%; height: 100%; background: #1e293b;"></div>
+        <div class="card-img-placeholder"></div>
         {{ end }}
+        <span class="tag on-img">{{ .Params.category | default "報導" }}</span>
       </div>
-      <div class="card-content">
+      <div class="card-body">
         <div class="card-meta">
-          <span class="card-tag {{ if eq .Params.category "城市發展" }}blue{{ end }}">{{ .Params.category | default "分類" }}</span>
-          <span class="card-date">{{ .Date.Format "2006年1月" }}</span>
+          <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+          {{ with .ReadingTime }}<span class="card-read-time">{{ . }} 分鐘閱讀</span>{{ end }}
         </div>
         <h2 class="card-title">{{ .Title }}</h2>
-        <p class="card-excerpt">{{ .Summary | plainify | truncate 60 }}</p>
+        <p class="card-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
       </div>
     </a>
   {{ end }}

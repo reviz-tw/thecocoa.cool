@@ -1,19 +1,164 @@
+{{ define "above-main" }}
+<div id="reading-bar"></div>
+{{ end }}
+
+{{ define "main-class" }}art-page{{ end }}
+
 {{ define "main" }}
-<article style="max-width: 800px; margin: 0 auto;">
-  <header style="margin-bottom: 2rem;">
-    {{ if .Params.category }}
-    <div style="margin-bottom: 1rem;">
-      <span class="card-tag accent">{{ .Params.category }}</span> 
-      <span class="card-date" style="margin-left: 1rem;">{{ .Date.Format "2006年1月2日" }}</span>
+<article>
+
+  <!-- Hero -->
+  <div class="art-hero">
+    <div class="art-hero-bg" {{ if .Params.image }}style="background-image: url('{{ .Params.image }}')"{{ end }}></div>
+    <div class="art-hero-overlay"></div>
+    <div class="art-hero-content">
+      <nav class="art-nav">
+        <a href="{{ "" | relURL }}" class="art-nav-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          首頁
+        </a>
+        {{ with .Params.category }}
+        <span class="art-nav-sep">·</span>
+        <span class="art-nav-cat">{{ . }}</span>
+        {{ end }}
+      </nav>
+      <p class="art-eyebrow">{{ .Params.category | default "報導" }}</p>
+      <h1 class="art-title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="art-subtitle">{{ . }}</p>{{ end }}
     </div>
-    {{ end }}
-    <h1 style="font-size: 2.5rem; line-height: 1.3; margin-bottom: 1.5rem;">{{ .Title }}</h1>
-    {{ if .Params.image }}
-    <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: auto; border-radius: 8px;">
-    {{ end }}
-  </header>
-  <div class="content" style="font-size: 1.125rem; color: var(--text-muted);">
-    {{ .Content }}
   </div>
+
+  <!-- Meta bar -->
+  <div class="art-meta-bar">
+    <div class="art-meta-left">
+      {{ with .Params.author }}<span class="art-author">{{ . }}</span>{{ end }}
+      <time class="art-date">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
+      {{ with .ReadingTime }}<span class="art-read-time">{{ . }} 分鐘閱讀</span>{{ end }}
+    </div>
+    <div class="art-meta-right">
+      <button class="art-share-btn" id="shareBtn" aria-label="分享文章">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        分享
+      </button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="art-body">
+    <div class="art-text">
+      {{ .Content }}
+    </div>
+
+    <!-- Floating share panel -->
+    <aside class="art-share-panel" id="sharePanel">
+      <p class="art-share-label">分享</p>
+      <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlize }}&text={{ .Title | urlize }}" target="_blank" rel="noopener" aria-label="分享到 Twitter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlize }}" target="_blank" rel="noopener" aria-label="分享到 Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <button class="art-share-copy" id="copyBtn" aria-label="複製連結">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </aside>
+  </div>
+
+  <!-- Tags -->
+  {{ with .Params.tags }}
+  <div class="art-tags">
+    {{ range . }}
+    <span class="art-tag"># {{ . }}</span>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <!-- Related articles -->
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ with $related }}
+  <section class="art-related">
+    <h2 class="art-related-title">延伸閱讀</h2>
+    <div class="art-related-grid">
+      {{ range . }}
+      <a href="{{ .RelPermalink }}" class="article-card article-card-sm">
+        <div class="card-img">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+          {{ else }}
+          <div class="card-img-placeholder"></div>
+          {{ end }}
+          <span class="tag on-img">{{ .Params.category | default "報導" }}</span>
+        </div>
+        <div class="card-body">
+          <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+          <h3 class="card-title">{{ .Title }}</h3>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
 </article>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('reading-bar');
+  const article = document.querySelector('.art-text');
+  if (bar && article) {
+    window.addEventListener('scroll', () => {
+      const rect = article.getBoundingClientRect();
+      const articleTop = rect.top + window.scrollY;
+      const articleH = article.offsetHeight;
+      const scrolled = window.scrollY - articleTop;
+      const progress = Math.min(Math.max(scrolled / articleH, 0), 1);
+      bar.style.width = (progress * 100) + '%';
+    });
+  }
+
+  // Scroll-triggered bar chart animations
+  const bars = document.querySelectorAll('[data-bar]');
+  if (bars.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.dataset.bar;
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    bars.forEach(b => { b.style.width = '0'; io.observe(b); });
+  }
+
+  // Share panel toggle
+  const shareBtn = document.getElementById('shareBtn');
+  const sharePanel = document.getElementById('sharePanel');
+  if (shareBtn && sharePanel) {
+    shareBtn.addEventListener('click', () => sharePanel.classList.toggle('visible'));
+  }
+
+  // Copy link
+  const copyBtn = document.getElementById('copyBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        copyBtn.style.color = 'var(--yellow)';
+        setTimeout(() => copyBtn.style.color = '', 1500);
+      });
+    });
+  }
+
+  // Floating share panel on scroll
+  if (sharePanel) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        sharePanel.classList.add('sticky');
+      } else {
+        sharePanel.classList.remove('sticky');
+      }
+    });
+  }
+</script>
 {{ end }}

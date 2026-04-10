@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="{{ site.LanguageCode | default "en-us" }}">
+<html lang="{{ site.LanguageCode | default "zh-tw" }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ block "title" . }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ site.Params.description }}">
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ block "title" . }}{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  {{ block "head" . }}{{ end }}
 </head>
 <body>
-    {{ partial "header.html" . }}
-    
-    <main class="container">
-        {{ block "main" . }}{{ end }}
-    </main>
+  {{ partial "header.html" . }}
 
-    {{ partial "footer.html" . }}
+  {{ block "above-main" . }}{{ end }}
+
+  <main class="{{ block "main-class" . }}page-main{{ end }}">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="search-box">
+      <input class="search-input" type="text" placeholder="搜尋報導、主題或關鍵字…" id="searchInput">
+      <p class="search-hint">按 Esc 關閉 &nbsp;·&nbsp; 使用空格分隔多個關鍵字</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('searchOverlay').classList.remove('open');
+      }
+    });
+    document.getElementById('searchOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+  </script>
+
+  {{ block "scripts" . }}{{ end }}
 </body>
 </html>
