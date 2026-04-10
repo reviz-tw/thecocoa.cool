@@ -28,6 +28,10 @@ title = 'THE COCOA'
     url = "/latest/"
     weight = 30
   [[menus.main]]
+    name = "分類"
+    url = "/categories/"
+    weight = 35
+  [[menus.main]]
     name = "觀點"
     url = "/opinions/"
     weight = 40

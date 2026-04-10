@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+<div class="section-head">
+  <p class="section-kicker">THE COCOA</p>
+  <h1 class="section-title">所有分類</h1>
+  <p class="section-desc">依主題瀏覽，找到你感興趣的報導。</p>
+</div>
+
+<div class="terms-grid">
+  {{ range .Data.Terms.Alphabetical }}
+  {{ $term := . }}
+  {{ $count := len $term.Pages }}
+  <a href="{{ $term.Page.RelPermalink }}" class="term-card">
+    <div class="term-card-inner">
+      <h2 class="term-name">{{ $term.Page.Title }}</h2>
+      <p class="term-count">{{ $count }} 篇報導</p>
+      {{ if $term.Pages }}
+      {{ $latest := index ($term.Pages.ByDate.Reverse) 0 }}
+      <p class="term-latest">最新：{{ $latest.Title | truncate 30 }}</p>
+      {{ end }}
+    </div>
+    <div class="term-card-arrow">→</div>
+  </a>
+  {{ end }}
+</div>
+
+{{ end }}

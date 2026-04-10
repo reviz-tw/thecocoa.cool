@@ -1,0 +1,80 @@
+{{ define "main" }}
+{{ $term := .Title }}
+{{ $sorted := .Pages.ByDate.Reverse }}
+
+<div class="section-head">
+  <p class="section-kicker">分類</p>
+  <h1 class="section-title">{{ $term }}</h1>
+  <p class="section-desc">共 {{ len .Pages }} 篇報導</p>
+</div>
+
+<div class="cards-grid">
+  {{ range $sorted }}
+  {{ $cardType := .Params.card_type | default "standard" }}
+  {{ if eq $cardType "deep-analysis" }}
+  <a href="{{ .RelPermalink }}" class="card-feature-yellow">
+    <div class="card-feature-img">
+      {{ if .Params.image }}
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+      {{ else }}
+      <div class="card-img-placeholder"></div>
+      {{ end }}
+    </div>
+    <div class="card-feature-body">
+      <span class="tag tag-dark">{{ .Params.category | default "深度分析" }}</span>
+      <h2 class="card-title">{{ .Title }}</h2>
+      <p class="card-excerpt">{{ .Params.summary | default (.Summary | plainify | truncate 100) }}</p>
+      <div class="card-meta">
+        <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+        <span class="card-read">{{ .ReadingTime }} 分鐘</span>
+      </div>
+    </div>
+  </a>
+  {{ else if eq $cardType "interactive" }}
+  <a href="{{ .RelPermalink }}" class="card-feature-blue">
+    <div class="card-feature-img">
+      {{ if .Params.image }}
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+      {{ else }}
+      <div class="card-img-placeholder"></div>
+      {{ end }}
+    </div>
+    <div class="card-feature-body">
+      <span class="tag">{{ .Params.category | default "互動圖表" }}</span>
+      <h2 class="card-title">{{ .Title }}</h2>
+      <p class="card-excerpt">{{ .Params.summary | default (.Summary | plainify | truncate 100) }}</p>
+      <div class="card-meta">
+        <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+        <span class="card-read">{{ .ReadingTime }} 分鐘</span>
+      </div>
+    </div>
+  </a>
+  {{ else }}
+  <a href="{{ .RelPermalink }}" class="article-card">
+    <div class="card-img">
+      {{ if .Params.image }}
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+      {{ else }}
+      <div class="card-img-placeholder"></div>
+      {{ end }}
+      <span class="tag on-img">{{ .Params.category | default "報導" }}</span>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">{{ .Title }}</h2>
+      <p class="card-excerpt">{{ .Params.summary | default (.Summary | plainify | truncate 80) }}</p>
+      <div class="card-meta">
+        <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+        <span class="card-read">{{ .ReadingTime }} 分鐘</span>
+      </div>
+    </div>
+  </a>
+  {{ end }}
+  {{ end }}
+</div>
+
+<!-- Back to all categories -->
+<div style="text-align:center; margin: 48px 0 24px;">
+  <a href="/categories/" class="btn-outline-sm">← 所有分類</a>
+</div>
+
+{{ end }}

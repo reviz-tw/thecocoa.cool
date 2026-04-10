@@ -19,10 +19,10 @@
         </a>
         {{ with .Params.category }}
         <span class="art-nav-sep">·</span>
-        <span class="art-nav-cat">{{ . }}</span>
+        <a class="art-nav-cat" href="/categories/{{ . | urlize }}/">{{ . }}</a>
         {{ end }}
       </nav>
-      <p class="art-eyebrow">{{ .Params.category | default "報導" }}</p>
+      <a class="art-eyebrow" href="/categories/{{ .Params.category | default "報導" | urlize }}/">{{ .Params.category | default "報導" }}</a>
       <h1 class="art-title">{{ .Title }}</h1>
       {{ with .Description }}<p class="art-subtitle">{{ . }}</p>{{ end }}
     </div>
@@ -64,14 +64,15 @@
     </aside>
   </div>
 
-  <!-- Tags -->
-  {{ with .Params.tags }}
+  <!-- Tags / Categories -->
   <div class="art-tags">
-    {{ range . }}
-    <span class="art-tag"># {{ . }}</span>
+    {{ with .Params.category }}
+    <a class="art-tag art-tag-cat" href="/categories/{{ . | urlize }}/">{{ . }}</a>
+    {{ end }}
+    {{ range .Params.tags }}
+    <a class="art-tag" href="/tags/{{ . | urlize }}/"># {{ . }}</a>
     {{ end }}
   </div>
-  {{ end }}
 
   <!-- Related articles -->
   {{ $related := .Site.RegularPages.Related . | first 3 }}
