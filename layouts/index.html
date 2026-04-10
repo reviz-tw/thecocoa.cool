@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $sorted := $posts.ByDate.Reverse }}
+<div class="cards-grid">
+  {{ range $sorted }}
+  {{ if eq .Params.card_type "deep-analysis" }}
+    <a href="{{ .RelPermalink }}" class="article-card card-feature-yellow">
+      <div class="tag">深度分析</div>
+      <h2 class="card-title">{{ .Title }}</h2>
+      <p class="card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
+      <div class="card-cta">
+        閱讀完整報告
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </div>
+    </a>
+
+  {{ else if eq .Params.card_type "interactive" }}
+    <a href="{{ .RelPermalink }}" class="article-card card-feature-blue">
+      <div class="card-graphic-wrap">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(116,177,245,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle><circle cx="12" cy="4" r="2"></circle></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="tag tag-blue">{{ .Params.category | default "互動圖表" }}</span>
+          <span class="card-date">{{ .Date.Format "2006年1月" }}</span>
+        </div>
+        <h2 class="card-title">{{ .Title }}</h2>
+        <p class="card-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
+      </div>
+    </a>
+
+  {{ else }}
+    <a href="{{ .RelPermalink }}" class="article-card">
+      <div class="card-img">
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+        {{ else }}
+        <div class="card-img-placeholder"></div>
+        {{ end }}
+        <span class="tag on-img">{{ .Params.category | default "報導" }}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-date">{{ .Date.Format "2006年1月2日" }}</span>
+          {{ with .ReadingTime }}<span class="card-read-time">{{ . }} 分鐘閱讀</span>{{ end }}
+        </div>
+        <h2 class="card-title">{{ .Title }}</h2>
+        <p class="card-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
+      </div>
+    </a>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}
