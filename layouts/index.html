@@ -4,7 +4,7 @@
 <div class="cards-grid">
   {{ range $sorted }}
   {{ if eq .Params.card_type "deep-analysis" }}
-    <a href="{{ .RelPermalink }}" class="article-card card-feature-yellow">
+    <a href="{{ or .Params.externalUrl .RelPermalink }}" class="article-card card-feature-yellow">
       <div class="tag">深度分析</div>
       <h2 class="card-title">{{ .Title }}</h2>
       <p class="card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
@@ -15,7 +15,7 @@
     </a>
 
   {{ else if eq .Params.card_type "interactive" }}
-    <a href="{{ .RelPermalink }}" class="article-card card-feature-blue">
+    <a href="{{ or .Params.externalUrl .RelPermalink }}" class="article-card card-feature-blue">
       <div class="card-graphic-wrap">
         <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(116,177,245,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle><circle cx="12" cy="4" r="2"></circle></svg>
       </div>
@@ -30,7 +30,7 @@
     </a>
 
   {{ else }}
-    <a href="{{ .RelPermalink }}" class="article-card">
+    <a href="{{ or .Params.externalUrl .RelPermalink }}" class="article-card">
       <div class="card-img">
         {{ if .Params.image }}
         <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">

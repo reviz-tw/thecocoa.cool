@@ -11,7 +11,7 @@
 {{ $top := first 3 $sorted }}
 <div class="hot-podium">
   {{ range $i, $p := $top }}
-  <a href="{{ $p.RelPermalink }}" class="hot-podium-card {{ if eq $i 0 }}hot-podium-first{{ end }}">
+  <a href="{{ or $p.Params.externalUrl $p.RelPermalink }}" class="hot-podium-card {{ if eq $i 0 }}hot-podium-first{{ end }}">
     <div class="hot-rank hot-rank-{{ add $i 1 }}">{{ add $i 1 }}</div>
     <div class="hot-podium-img">
       {{ if $p.Params.image }}
@@ -38,7 +38,7 @@
 {{ if $rest }}
 <div class="hot-list">
   {{ range $i, $p := $rest }}
-  <a href="{{ $p.RelPermalink }}" class="hot-row">
+  <a href="{{ or $p.Params.externalUrl $p.RelPermalink }}" class="hot-row">
     <span class="hot-row-rank">{{ add $i 4 }}</span>
     <div class="hot-row-thumb">
       {{ if $p.Params.image }}
