@@ -8,15 +8,14 @@
 
 <div class="terms-grid">
   {{ range .Data.Terms.Alphabetical }}
-  {{ $term := . }}
-  {{ $count := len $term.Pages }}
-  <a href="{{ $term.Page.RelPermalink }}" class="term-card">
+  <a href="{{ .Page.RelPermalink }}" class="term-card">
     <div class="term-card-inner">
-      <h2 class="term-name">{{ $term.Page.Title }}</h2>
-      <p class="term-count">{{ $count }} 篇報導</p>
-      {{ if $term.Pages }}
-      {{ $latest := index ($term.Pages.ByDate.Reverse) 0 }}
-      <p class="term-latest">最新：{{ $latest.Title | truncate 30 }}</p>
+      <h2 class="term-name">{{ .Page.Title }}</h2>
+      <p class="term-count">{{ len .Pages }} 篇報導</p>
+      {{ with .Pages.ByDate.Reverse }}
+      {{ with index . 0 }}
+      <p class="term-latest">最新：{{ .Title | truncate 30 }}</p>
+      {{ end }}
       {{ end }}
     </div>
     <div class="term-card-arrow">→</div>

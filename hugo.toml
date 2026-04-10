@@ -10,6 +10,10 @@ title = 'THE COCOA'
     [markup.goldmark.renderer]
       unsafe = true
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 [params]
   description = "A modern, high-end, data-driven news website."
   author = "THE COCOA Team"

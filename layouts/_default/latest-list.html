@@ -1,6 +1,6 @@
 {{ define "main" }}
-{{ $section := .Site.GetPage "section" "posts" }}
-{{ $sorted := $section.Pages.ByDate.Reverse }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $sorted := $posts.ByDate.Reverse }}
 
 <div class="section-head">
   <h1 class="section-title">{{ .Title }}</h1>
