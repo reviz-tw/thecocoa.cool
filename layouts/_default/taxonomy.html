@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ $term }} | TheC​ocoa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&family=Manrope:wght@400;500;700&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@400;700;800&family=Manrope:wght@400;500;700&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 <script>
 tailwind.config = {
@@ -42,6 +42,11 @@ tailwind.config = {
   body{font-family:'Manrope',sans-serif;background:#fdfdfd;color:#191c1d;}
   .article-card:hover .card-img-inner{transform:scale(1.04);}
   .card-img-inner{transition:transform .7s cubic-bezier(.4,0,.2,1);}
+
+  /* ── Logo ──────────────────────────────────────── */
+  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
+  .tc-logo-sm{font-size:1.375rem;}
+  .tc-logo-lg{font-size:1.5rem;}
 </style>
 </head>
 <body class="bg-white antialiased">
@@ -50,7 +55,7 @@ tailwind.config = {
 <header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <div class="flex items-center gap-10">
-      <a href="{{ "" | relURL }}" class="text-2xl font-extrabold font-headline tracking-tighter flex items-center"><span style="color:#2B5F75">T</span><span style="color:#81C7D4">h</span><span style="color:#EEA9A9">e</span><span style="color:#F7D94C">C</span><span style="color:#2B5F75">o</span><span style="color:#81C7D4">c</span><span style="color:#EEA9A9">o</span><span style="color:#F7D94C">a</span></a>
+      <a href="{{ \"\" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
       <nav class="hidden md:flex items-center gap-8">
         <a href="{{ "categories/社會議題/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">社會</a>
         <a href="{{ "categories/全球經濟/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">經濟</a>
@@ -132,7 +137,7 @@ tailwind.config = {
 <footer class="bg-slate-50 border-t border-slate-100 py-16">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10">
     <div class="md:col-span-4 space-y-4">
-      <span class="block font-headline text-2xl font-extrabold tracking-tighter"><span style="color:#2B5F75">T</span><span style="color:#81C7D4">h</span><span style="color:#EEA9A9">e</span><span style="color:#F7D94C">C</span><span style="color:#2B5F75">o</span><span style="color:#81C7D4">c</span><span style="color:#EEA9A9">o</span><span style="color:#F7D94C">a</span></span>
+      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
       <p class="font-body text-sm text-slate-500 leading-relaxed max-w-xs">以數據為核心的獨立新聞媒體。每一個數字背後，都是一個值得說的故事。</p>
       <p class="font-label text-xs text-slate-400">© {{ now.Year }} TheCocoa. All rights reserved.</p>
     </div>

@@ -14,7 +14,7 @@
 <title>{{ .Title }} | TheCocoa</title>
 <meta name="description" content="{{ .Params.summary | default (.Summary | plainify | truncate 160) }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Manrope:wght@200..800&family=Work+Sans:wght@300..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@300..700&family=Manrope:wght@200..800&family=Work+Sans:wght@300..600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 <script>
@@ -169,6 +169,11 @@ tailwind.config = {
   .art-prose img{width:100%;border-radius:.25rem;margin:2rem 0;}
   .art-prose figure{margin:2.5rem 0;}
   .art-prose figcaption{font-size:.8rem;color:#71787d;margin-top:.5rem;font-family:'Work Sans',sans-serif;}
+
+  /* ── Logo ──────────────────────────────────────── */
+  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
+  .tc-logo-sm{font-size:1.375rem;}
+  .tc-logo-lg{font-size:1.5rem;}
 </style>
 </head>
 <body class="antialiased selection:bg-secondary-container selection:text-on-secondary-container">
@@ -178,7 +183,7 @@ tailwind.config = {
 <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/10">
   <nav class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto h-16">
     <div class="flex items-center gap-8">
-      <a href="{{ "" | relURL }}" class="text-xl font-bold tracking-tighter font-headline flex items-center"><span style="color:#2B5F75">T</span><span style="color:#81C7D4">h</span><span style="color:#EEA9A9">e</span><span style="color:#F7D94C">C</span><span style="color:#2B5F75">o</span><span style="color:#81C7D4">c</span><span style="color:#EEA9A9">o</span><span style="color:#F7D94C">a</span></a>
+      <a href="{{ "" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
       <div class="hidden md:flex items-center gap-6">
         <a href="{{ "hot/" | relURL }}" class="text-slate-600 hover:text-primary label-font text-sm transition-colors">熱門</a>
         <a href="{{ "latest/" | relURL }}" class="text-slate-600 hover:text-primary label-font text-sm transition-colors">最新</a>
@@ -382,7 +387,7 @@ tailwind.config = {
 <footer class="w-full mt-0 bg-slate-50">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 py-12 max-w-7xl mx-auto">
     <div class="space-y-6">
-      <span class="block font-headline text-xl font-extrabold tracking-tighter"><span style="color:#2B5F75">T</span><span style="color:#81C7D4">h</span><span style="color:#EEA9A9">e</span><span style="color:#F7D94C">C</span><span style="color:#2B5F75">o</span><span style="color:#81C7D4">c</span><span style="color:#EEA9A9">o</span><span style="color:#F7D94C">a</span></span>
+      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
       <p class="text-slate-500 max-w-md font-body text-sm leading-relaxed">透過數據架構重新定義新聞美學。我們致力於提供最具深度與視覺震撼力的全球趨勢分析。</p>
     </div>
     <div class="grid grid-cols-2 gap-8">

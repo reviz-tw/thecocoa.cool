@@ -1,0 +1,16 @@
+{{- /*
+  logo.html — the thecocoa wordmark
+  Usage inside a template:  {{ partial "logo.html" (dict "href" ("" | relURL) "size" "lg") }}
+  size: "sm" (nav) | "lg" (footer)
+*/ -}}
+{{- $href := .href | default "/" -}}
+{{- $size  := .size  | default "sm" -}}
+{{- if eq $size "lg" -}}
+<a href="{{ $href }}" class="tc-logo tc-logo-lg" aria-label="TheCocoa">
+  <span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span>
+</a>
+{{- else -}}
+<a href="{{ $href }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa">
+  <span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span>
+</a>
+{{- end -}}
