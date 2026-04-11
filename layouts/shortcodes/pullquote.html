@@ -1,0 +1,12 @@
+{{/*
+  pullquote — large editorial pull-quote with optional attribution
+
+  Usage:
+    {{< pullquote by="Julian Thorne" >}}
+      韌性已取代純粹的成本控制，成為企業財務報表上的核心指標。
+    {{< /pullquote >}}
+*/}}
+<blockquote class="sc-pullquote">
+  <p class="sc-pullquote-text">{{ .Inner | markdownify }}</p>
+  {{ with .Get "by" }}<cite class="sc-pullquote-cite">— {{ . }}</cite>{{ end }}
+</blockquote>

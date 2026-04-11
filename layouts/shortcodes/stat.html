@@ -1,0 +1,14 @@
+{{/*
+  stat — single stat tile, used inside {{< statrow >}}
+
+  Usage:
+    {{< stat label="自動化設施投資" value="$84.2B" note="Global CapEx 2024" color="secondary" >}}
+
+  color: "primary" (default) | "secondary" | "tertiary"
+*/}}
+{{ $color := .Get "color" | default "primary" }}
+<div class="sc-stat sc-stat-{{ $color }}">
+  <span class="sc-stat-label">{{ .Get "label" }}</span>
+  <span class="sc-stat-value">{{ .Get "value" }}</span>
+  {{ with .Get "note" }}<span class="sc-stat-note">{{ . }}</span>{{ end }}
+</div>

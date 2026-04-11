@@ -1,0 +1,13 @@
+{{/*
+  statrow — a row of 2–4 stat cards inline in the article body
+
+  Usage:
+    {{< statrow >}}
+      {{< stat label="區域貿易成本" value="+14.2%" note="YoY Growth" >}}
+      {{< stat label="自動化設施投資" value="$84.2B" note="Global CapEx 2024" >}}
+      {{< stat label="數據主權指數" value="0.68" note="Systemic Risk Warning" color="tertiary" >}}
+    {{< /statrow >}}
+*/}}
+<div class="sc-statrow">
+  {{ .Inner }}
+</div>

@@ -1,0 +1,9 @@
+{{/*
+  divider — section break with optional heading (matches the design's py-12 border-y block)
+
+  Usage:
+    {{< divider heading="架構的轉向：從單線到網格" >}}
+*/}}
+<div class="sc-divider">
+  {{ with .Get "heading" }}<h2 class="sc-divider-heading">{{ . }}</h2>{{ end }}
+</div>

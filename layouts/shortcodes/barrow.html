@@ -1,0 +1,21 @@
+{{/*
+  barrow — one labeled progress-bar row, used inside {{< dataviz >}}
+
+  Usage:
+    {{< barrow label="東南亞節點" pct="75" color="primary" sub="+42% YoY" >}}
+
+  color: "primary" | "secondary" | "tertiary"   (default: primary)
+  pct: 0–100 (integer)
+*/}}
+{{ $color := .Get "color" | default "primary" }}
+{{ $pct   := .Get "pct"   | default "60" }}
+<div class="sc-barrow">
+  <div class="sc-barrow-meta">
+    <span class="sc-barrow-label">{{ .Get "label" }}</span>
+    {{ with .Get "sub" }}<span class="sc-barrow-sub">{{ . }}</span>{{ end }}
+    <span class="sc-barrow-pct">{{ $pct }}%</span>
+  </div>
+  <div class="sc-barrow-track">
+    <div class="sc-barrow-fill sc-barrow-{{ $color }}" data-bar="{{ $pct }}%"></div>
+  </div>
+</div>

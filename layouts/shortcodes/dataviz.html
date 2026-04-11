@@ -1,0 +1,22 @@
+{{/*
+  dataviz — embedded data visualization block (Fig 01 style)
+
+  Usage:
+    {{< dataviz title="Fig 01. Trade Node Connectivity Index" caption="Data: TheCocoa Intelligence Unit." icon="monitoring" >}}
+      {{< barrow label="Primary nodes"  pct="75" color="primary" >}}
+      {{< barrow label="Secondary nodes" pct="50" color="secondary" >}}
+      {{< barrow label="Projected 2024"  pct="67" color="tertiary" >}}
+    {{< /dataviz >}}
+*/}}
+<div class="sc-dataviz">
+  <div class="sc-dataviz-head">
+    <span class="sc-dataviz-title">{{ .Get "title" }}</span>
+    {{ with .Get "icon" }}<span class="material-symbols-outlined sc-dataviz-icon">{{ . }}</span>{{ end }}
+  </div>
+  <div class="sc-dataviz-body">
+    {{ .Inner }}
+  </div>
+  {{ with .Get "caption" }}
+  <p class="sc-dataviz-caption">{{ . }}</p>
+  {{ end }}
+</div>

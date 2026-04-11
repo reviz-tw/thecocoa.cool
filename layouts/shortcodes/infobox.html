@@ -1,0 +1,19 @@
+{{/*
+  infobox — highlighted context / methodology box
+
+  Usage:
+    {{< infobox title="方法論說明" icon="info" >}}
+      本報告的數據來自 thecocoa.cool 專利追蹤技術，整合超過 200 個公開資料來源。
+    {{< /infobox >}}
+
+  icon: any Material Symbol name (default: "info")
+  color: "teal" (default) | "coral" | "yellow" | "blue"
+*/}}
+{{ $color := .Get "color" | default "teal" }}
+<div class="sc-infobox sc-infobox-{{ $color }}">
+  <div class="sc-infobox-head">
+    <span class="material-symbols-outlined sc-infobox-icon">{{ .Get "icon" | default "info" }}</span>
+    {{ with .Get "title" }}<span class="sc-infobox-title">{{ . }}</span>{{ end }}
+  </div>
+  <div class="sc-infobox-body">{{ .Inner | markdownify }}</div>
+</div>
