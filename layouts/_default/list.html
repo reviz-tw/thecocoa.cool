@@ -49,8 +49,12 @@
   </div>
 
   <!-- ═══ CARDS GRID ═══ -->
+  {{- $pages := .Pages -}}
+  {{- if not $pages -}}
+    {{- $pages = (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- end -}}
   <div class="cards-grid" id="cardsGrid">
-    {{ range .Pages }}
+    {{ range $pages }}
     {{- $cat := .Params.category | default "報導" -}}
     {{- $ck  := index $colorMap $cat | default "blue" -}}
     <a class="card" data-cat="{{ $cat }}" href="{{ or .Params.externalUrl .RelPermalink }}">
