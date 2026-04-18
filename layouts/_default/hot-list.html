@@ -1,196 +1,47 @@
-{{- $posts   := where .Site.RegularPages "Section" "posts" -}}
-{{- $sorted  := sort $posts "Params.views" "desc" -}}
-{{- $top     := first 3 $sorted -}}
-{{- $rest    := after 3 $sorted -}}
+{{ define "main" }}
+{{- $posts    := where .Site.RegularPages "Section" "posts" -}}
+{{- $byViews  := sort $posts "Params.views" "desc" -}}
 {{- $colorMap := dict
       "科技社會" "teal"  "城市發展" "teal"
       "環境氣候" "coral" "人口議題" "coral"
       "全球經濟" "yellow" "深度分析" "yellow" "居住正義" "yellow"
       "社會議題" "blue"  "勞動市場" "blue"  "媒體觀察" "blue" -}}
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>熱門文章 | THE COCOA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@400;700;800&family=Manrope:wght@400;500;700&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "brand-teal":   "#2B5F75",
-        "brand-blue":   "#81C7D4",
-        "brand-coral":  "#EEA9A9",
-        "brand-yellow": "#F7D94C",
-        "on-surface":   "#191C1D",
-        "on-surface-variant": "#41484C",
-        "surface-container": "#EDEEF0",
-      },
-      fontFamily: {
-        headline: ["Space Grotesk","sans-serif"],
-        body:     ["Manrope","sans-serif"],
-        label:    ["Work Sans","sans-serif"],
-      },
-    }
-  }
-}
-</script>
-<style>
-  *{box-sizing:border-box;}
-  body{font-family:'Manrope',sans-serif;background:#fdfdfd;color:#191c1d;}
-  .card-img-inner{transition:transform .7s cubic-bezier(.4,0,.2,1);}
-  .podium-card:hover .card-img-inner{transform:scale(1.04);}
-  .rank-row:hover{background:#f8fafc;}
 
-  /* ── Logo ──────────────────────────────────────── */
-  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
-  .tc-logo-sm{font-size:1.375rem;}
-  .tc-logo-lg{font-size:1.5rem;}
-</style>
-</head>
-<body class="bg-white antialiased">
+<div class="page">
 
-<!-- NAV -->
-<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-10">
-      <a href="{{ "" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="{{ "categories/社會議題/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">社會</a>
-        <a href="{{ "categories/全球經濟/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">經濟</a>
-        <a href="{{ "categories/科技社會/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">科技</a>
-        <a href="{{ "categories/環境氣候/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">環境</a>
-        <a href="{{ "hot/" | relURL }}" class="font-headline font-bold text-sm text-brand-teal border-b-2 border-brand-teal pb-0.5">熱門</a>
-        <a href="{{ "latest/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">最新</a>
-      </nav>
-    </div>
-    <a href="{{ "categories/" | relURL }}" class="hidden md:inline-flex items-center px-4 py-1.5 border border-brand-teal/30 text-brand-teal text-xs font-label font-semibold uppercase tracking-widest hover:bg-brand-teal hover:text-white transition-all">所有分類</a>
-  </div>
-</header>
-
-<main class="pt-16">
-
-  <!-- PAGE HEADER -->
-  <div class="max-w-7xl mx-auto px-6 pt-14 pb-10">
-    <div class="flex items-baseline justify-between border-b border-slate-200 pb-5">
-      <div>
-        <p class="font-label text-[10px] uppercase tracking-widest text-slate-400 mb-2">本週排行</p>
-        <h1 class="font-headline text-4xl font-extrabold tracking-tight text-brand-teal">熱門文章</h1>
-      </div>
-      <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest hidden sm:block">依閱讀數排列</p>
-    </div>
-  </div>
-
-  <!-- TOP 3 PODIUM -->
-  <section class="max-w-7xl mx-auto px-6 mb-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {{ range $i, $p := $top }}
-      {{ $cat := $p.Params.category | default "報導" }}
-      {{ $ck  := index $colorMap $cat | default "blue" }}
-      <a href="{{ or $p.Params.externalUrl $p.RelPermalink }}" class="podium-card group block border border-slate-100 hover:border-brand-teal/30 transition-colors overflow-hidden" style="border-radius:4px">
-        <!-- Image -->
-        <div class="relative aspect-[16/9] overflow-hidden bg-surface-container">
-          {{ if $p.Params.image }}
-          <img class="card-img-inner w-full h-full object-cover" src="{{ $p.Params.image }}" alt="{{ $p.Title }}" loading="lazy">
-          {{ else }}
-          <div class="w-full h-full bg-surface-container flex items-center justify-center">
-            <span class="font-headline text-4xl font-black text-slate-200">TC</span>
-          </div>
-          {{ end }}
-          <!-- Rank badge -->
-          <div class="absolute top-3 left-3 w-9 h-9 flex items-center justify-center font-headline font-black text-base
-            {{ if eq $i 0 }}bg-brand-yellow text-brand-teal{{ else if eq $i 1 }}bg-slate-800 text-white{{ else }}bg-white text-brand-teal border border-slate-200{{ end }}"
-            style="border-radius:2px">
-            {{ add $i 1 }}
-          </div>
-        </div>
-        <!-- Body -->
-        <div class="p-5 space-y-2.5">
-          {{ if eq $ck "teal" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-teal text-white text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "coral" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-coral text-white text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "yellow" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-yellow text-brand-teal text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else }}
-          <span class="inline-block px-2 py-0.5 bg-brand-blue text-brand-teal text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ end }}
-          <h2 class="font-headline text-lg font-bold leading-snug text-on-surface group-hover:text-brand-teal transition-colors">{{ $p.Title }}</h2>
-          <p class="font-body text-sm text-on-surface-variant line-clamp-2">{{ $p.Params.summary | default ($p.Summary | plainify | truncate 80) }}</p>
-          <div class="flex items-center gap-2 pt-1 text-[11px] font-label font-bold uppercase tracking-tighter text-slate-400">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            {{ $p.Params.views | default 0 }} 次閱讀
-          </div>
-        </div>
-      </a>
-      {{ end }}
-    </div>
-  </section>
-
-  <!-- RANKED LIST (4–N) -->
-  {{ if $rest }}
-  <section class="max-w-7xl mx-auto px-6 pb-24">
-    <div class="border-t border-slate-100 divide-y divide-slate-100">
-      {{ range $i, $p := $rest }}
-      {{ $cat := $p.Params.category | default "報導" }}
-      {{ $ck  := index $colorMap $cat | default "blue" }}
-      <a href="{{ or $p.Params.externalUrl $p.RelPermalink }}" class="rank-row group flex items-center gap-5 py-5 px-2 transition-colors">
-        <!-- Rank number -->
-        <span class="font-headline text-2xl font-black text-slate-200 w-8 text-center flex-shrink-0">{{ add $i 4 }}</span>
-        <!-- Thumb -->
-        <div class="w-20 h-14 flex-shrink-0 overflow-hidden bg-surface-container" style="border-radius:2px">
-          {{ if $p.Params.image }}
-          <img class="w-full h-full object-cover" src="{{ $p.Params.image }}" alt="{{ $p.Title }}" loading="lazy">
-          {{ else }}
-          <div class="w-full h-full bg-slate-100"></div>
-          {{ end }}
-        </div>
-        <!-- Text -->
-        <div class="flex-1 min-w-0 space-y-1">
-          {{ if eq $ck "teal" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-teal text-white text-[9px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "coral" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-coral text-white text-[9px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "yellow" }}
-          <span class="inline-block px-2 py-0.5 bg-brand-yellow text-brand-teal text-[9px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else }}
-          <span class="inline-block px-2 py-0.5 bg-brand-blue text-brand-teal text-[9px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ end }}
-          <h3 class="font-headline font-bold text-base text-on-surface group-hover:text-brand-teal transition-colors truncate">{{ $p.Title }}</h3>
-          <p class="font-label text-[11px] text-slate-400 uppercase tracking-tighter">{{ $p.Date.Format "2006年1月2日" }}</p>
-        </div>
-        <!-- Views -->
-        <div class="flex-shrink-0 text-right hidden sm:block">
-          <div class="font-headline font-bold text-sm text-brand-teal">{{ $p.Params.views | default 0 }}</div>
-          <div class="font-label text-[10px] text-slate-400 uppercase tracking-widest">閱讀</div>
-        </div>
-      </a>
-      {{ end }}
-    </div>
-  </section>
-  {{ end }}
-
-</main>
-
-<!-- FOOTER -->
-<footer class="bg-slate-50 border-t border-slate-100 py-12">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+  <section class="ph">
     <div>
-      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
-      <p class="font-label text-xs text-slate-400 mt-1">© {{ now.Year }} THE COCOA. All rights reserved.</p>
+      <p class="ph-kicker">THE COCOA<span class="ph-dot"></span>熱門文章</p>
+      <h1 class="ph-ttl">讀者最熱讀的<br><em>報導</em>。</h1>
     </div>
-    <div class="flex flex-wrap gap-x-8 gap-y-2 font-body text-sm text-slate-500">
-      <a href="{{ "" | relURL }}" class="hover:text-brand-teal transition-colors">首頁</a>
-      <a href="{{ "latest/" | relURL }}" class="hover:text-brand-teal transition-colors">最新</a>
-      <a href="{{ "categories/" | relURL }}" class="hover:text-brand-teal transition-colors">所有分類</a>
-      <a href="{{ "about/" | relURL }}" class="hover:text-brand-teal transition-colors">關於我們</a>
-      <a href="{{ "privacy/" | relURL }}" class="hover:text-brand-teal transition-colors">隱私政策</a>
+    <div class="ph-stats">
+      <div class="ph-stat"><span class="ph-stat-n">{{ len $byViews }}</span><span class="ph-stat-lb">篇報導</span></div>
     </div>
-  </div>
-</footer>
+  </section>
 
-</body>
-</html>
+  <div class="cards-grid">
+    {{ range $byViews }}
+    {{- $cat := .Params.category | default "報導" -}}
+    {{- $ck  := index $colorMap $cat | default "blue" -}}
+    <a class="card" data-cat="{{ $cat }}" href="{{ or .Params.externalUrl .RelPermalink }}">
+      <div class="card-img">
+        <span class="card-tag cat-chip cat-{{ $ck }}">{{ $cat }}</span>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+        {{ end }}
+      </div>
+      <div class="card-body">
+        <h3 class="card-ttl">{{ .Title }}</h3>
+        <p class="card-sum">{{ .Params.summary | default (.Summary | plainify | truncate 80) }}</p>
+        <div class="card-meta">
+          <time>{{ .Date.Format "2006.01.02" }}</time>
+          {{ with .Params.author }}<span class="card-meta-dot"></span><span>By {{ . }}</span>{{ end }}
+          {{ with .Params.views }}<span class="card-meta-dot"></span><span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
+        </div>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}

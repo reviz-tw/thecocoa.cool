@@ -1,3 +1,4 @@
+{{ define "main" }}
 {{- $posts    := where .Site.RegularPages "Section" "posts" -}}
 {{- $byViews  := sort $posts "Params.views" "desc" -}}
 {{- $hero     := index $byViews 0 -}}
@@ -7,307 +8,199 @@
       "環境氣候" "coral" "人口議題" "coral"
       "全球經濟" "yellow" "深度分析" "yellow" "居住正義" "yellow"
       "社會議題" "blue"  "勞動市場" "blue"  "媒體觀察" "blue" -}}
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE COCOA | 情報饋送</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@400;700;800&family=Manrope:wght@400;500;700&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "brand-teal":   "#2B5F75",
-        "brand-blue":   "#81C7D4",
-        "brand-coral":  "#EEA9A9",
-        "brand-yellow": "#F7D94C",
-        "surface":      "#F9F9FB",
-        "on-surface":   "#191C1D",
-        "on-surface-variant": "#41484C",
-        "surface-container": "#EDEEF0",
-        "outline-variant":   "#C0C7CC",
-      },
-      fontFamily: {
-        headline: ["Space Grotesk", "sans-serif"],
-        body:     ["Manrope", "sans-serif"],
-        label:    ["Work Sans", "sans-serif"],
-      },
-    }
-  }
-}
-</script>
-<style>
-  * { box-sizing: border-box; }
-  body { font-family: 'Manrope', sans-serif; background: #fdfdfd; color: #191c1d; }
-  .article-card:hover .card-img-inner { transform: scale(1.04); }
-  .card-img-inner { transition: transform .7s cubic-bezier(.4,0,.2,1); }
-  .nav-link { transition: color .15s; }
 
-  /* ── Logo ──────────────────────────────────────── */
-  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
-  .tc-logo-sm{font-size:1.375rem;}
-  .tc-logo-lg{font-size:1.5rem;}
-</style>
-</head>
-<body class="bg-white antialiased">
+<div class="page">
 
-<!-- ── NAVIGATION ─────────────────────────────── -->
-<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-10">
-      <a href="{{ "" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="{{ "categories/社會議題/" | relURL }}" class="nav-link font-headline font-bold tracking-tight text-slate-400 hover:text-brand-teal text-sm">社會</a>
-        <a href="{{ "categories/全球經濟/" | relURL }}" class="nav-link font-headline font-bold tracking-tight text-slate-400 hover:text-brand-teal text-sm">經濟</a>
-        <a href="{{ "categories/科技社會/" | relURL }}" class="nav-link font-headline font-bold tracking-tight text-slate-400 hover:text-brand-teal text-sm">科技</a>
-        <a href="{{ "categories/環境氣候/" | relURL }}" class="nav-link font-headline font-bold tracking-tight text-slate-400 hover:text-brand-teal text-sm">環境</a>
-        <a href="{{ "hot/" | relURL }}" class="nav-link font-headline font-bold tracking-tight text-slate-400 hover:text-brand-teal text-sm">熱門</a>
-      </nav>
+  <!-- ═══ PAGE HEADER ═══ -->
+  <section class="ph">
+    <div class="ph-body">
+      <p class="ph-kicker">THE COCOA<span class="ph-dot"></span>數據新聞</p>
+      <h1 class="ph-ttl">今日的數字，<br>是明日的<em>故事</em>。</h1>
     </div>
-    <div class="flex items-center gap-3">
-      <a href="{{ "categories/" | relURL }}" class="hidden md:flex items-center gap-1 px-4 py-1.5 border border-brand-teal/30 text-brand-teal text-xs font-label font-semibold uppercase tracking-widest hover:bg-brand-teal hover:text-white transition-all">
-        所有分類
-      </a>
-      <button class="p-2 hover:bg-slate-50 rounded-full transition-colors" aria-label="搜尋">
-        <span class="material-symbols-outlined text-brand-teal" style="font-size:22px">search</span>
-      </button>
+    <div class="ph-stats">
+      {{- $weekAgo   := now.AddDate 0 0 -7 -}}
+      {{- $weekPosts := where (where .Site.RegularPages "Section" "posts") "Date" "ge" $weekAgo -}}
+      <div class="ph-stat"><span class="ph-stat-n">{{ len $weekPosts }}</span><span class="ph-stat-lb">本週報導</span></div>
+      <div class="ph-stat"><span class="ph-stat-n">{{ len $posts }}</span><span class="ph-stat-lb">全部報導</span></div>
     </div>
-  </div>
-</header>
+  </section>
 
-<main class="pt-16">
-
-<!-- ── HERO ───────────────────────────────────── -->
-{{ with $hero }}
-<section class="max-w-7xl mx-auto px-6 pt-16 pb-20">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-
-    <!-- Text -->
-    <div class="lg:col-span-6 space-y-6">
-      {{ $cat := .Params.category | default "報導" }}
-      {{ $ck  := index $colorMap $cat | default "blue" }}
-      <div>
-        {{ if eq $ck "teal" }}
-        <span class="inline-block px-3 py-1 bg-brand-teal text-white text-[11px] font-black font-label tracking-widest uppercase">{{ $cat }}</span>
-        {{ else if eq $ck "coral" }}
-        <span class="inline-block px-3 py-1 bg-brand-coral text-white text-[11px] font-black font-label tracking-widest uppercase">{{ $cat }}</span>
-        {{ else if eq $ck "yellow" }}
-        <span class="inline-block px-3 py-1 bg-brand-yellow text-brand-teal text-[11px] font-black font-label tracking-widest uppercase">{{ $cat }}</span>
-        {{ else }}
-        <span class="inline-block px-3 py-1 bg-brand-blue text-brand-teal text-[11px] font-black font-label tracking-widest uppercase">{{ $cat }}</span>
-        {{ end }}
-      </div>
-      <h1 class="font-headline text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.06] tracking-tight text-on-surface">
-        {{ .Title }}
-      </h1>
-      <p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-lg">
-        {{ .Params.summary | default (.Summary | plainify | truncate 120) }}
-      </p>
-      <div class="flex items-center gap-4 pt-2">
-        <a href="{{ or .Params.externalUrl .RelPermalink }}" class="px-9 py-4 bg-brand-teal text-white font-headline font-bold uppercase tracking-widest text-sm hover:bg-slate-800 transition-colors">
-          閱讀完整報導
-        </a>
-        <span class="text-xs font-label text-slate-400 uppercase tracking-widest">{{ .ReadingTime }} 分鐘閱讀</span>
-      </div>
-    </div>
-
-    <!-- Image -->
-    <div class="lg:col-span-6">
-      <a href="{{ or .Params.externalUrl .RelPermalink }}" class="block group overflow-hidden bg-surface-container" style="border-radius:4px">
+  <!-- ═══ HERO · MAGAZINE ═══ -->
+  {{ with $hero }}
+  {{- $cat := .Params.category | default "報導" -}}
+  {{- $ck  := index $colorMap $cat | default "blue" -}}
+  <section class="hero-split">
+    <a class="hero-main" href="{{ or .Params.externalUrl .RelPermalink }}">
+      <div class="hero-main-img">
+        <div class="hero-badges" style="position:absolute;top:16px;left:16px;z-index:2">
+          <span class="cat-chip cat-{{ $ck }}">{{ $cat }}</span>
+          <span class="cat-chip cat-ko">本週焦點</span>
+        </div>
         {{ if .Params.image }}
-        <img src="{{ .Params.image }}" alt="{{ .Title }}"
-          class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-          loading="eager">
+        <img src="{{ .Params.image }}" alt="{{ .Title }}">
         {{ else }}
-        <div class="w-full aspect-[16/10] bg-surface-container flex items-center justify-center">
-          <span class="font-headline text-4xl font-black text-outline-variant">TC</span>
+        <div style="width:100%;height:100%;background:var(--tc-surface-100);display:flex;align-items:center;justify-content:center">
+          <span style="font-family:var(--tc-font-headline);font-size:3rem;font-weight:900;color:var(--tc-outline)">TC</span>
         </div>
         {{ end }}
+      </div>
+      <div class="hero-main-body">
+        <h2 class="hero-ttl">{{ .Title }}</h2>
+        <p class="hero-lede">{{ .Params.summary | default (.Summary | plainify | truncate 120) }}</p>
+        <div class="hero-meta">
+          <span>{{ .Date.Format "2006.01.02" }}</span><span class="hero-meta-dot"></span>
+          {{ with .Params.author }}<span>By {{ . }}</span><span class="hero-meta-dot"></span>{{ end }}
+          <span>{{ .ReadingTime }} Min Read</span>
+          {{ with .Params.views }}<span class="hero-meta-dot"></span><span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
+        </div>
+      </div>
+    </a>
+
+    <div class="hero-side">
+      {{ range first 2 (after 1 $byViews) }}
+      {{- $sc  := .Params.category | default "報導" -}}
+      {{- $sck := index $colorMap $sc | default "blue" -}}
+      <a class="side-card" href="{{ or .Params.externalUrl .RelPermalink }}">
+        <span class="cat-chip cat-{{ $sck }}" style="align-self:flex-start">{{ $sc }}</span>
+        <h3 class="side-ttl">{{ .Title }}</h3>
+        <p class="side-sum">{{ .Params.summary | default (.Summary | plainify | truncate 80) }}</p>
+        <span class="side-meta">
+          <span>{{ .Date.Format "2006.01.02" }}</span>
+          {{ with .Params.author }}<span class="hero-meta-dot"></span><span>By {{ . }}</span>{{ end }}
+        </span>
       </a>
+      {{ end }}
     </div>
+  </section>
+  {{ end }}
 
+  <!-- ═══ DEEP REPORTS ═══ -->
+  <div class="sec-head">
+    <h2 class="sec-ttl">深度報導 <span class="sec-num">— 01 / Deep Reports</span></h2>
+    <span class="sec-sub">最新發布 · 長篇數據敘事</span>
   </div>
-</section>
-{{ end }}
 
-<!-- ── DIVIDER ─────────────────────────────────── -->
-<div class="max-w-7xl mx-auto px-6">
-  <div class="flex items-baseline justify-between border-b border-slate-200 pb-5 mb-14">
-    <h2 class="font-headline text-3xl font-extrabold tracking-tight text-brand-teal">情報饋送</h2>
-    <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest hidden sm:block">依最新發布時間排列</p>
-  </div>
-</div>
-
-<!-- ── FEED GRID ───────────────────────────────── -->
-<section class="max-w-7xl mx-auto px-6 mb-28">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-    {{ range $feed }}
-    {{ $cat := .Params.category | default "報導" }}
-    {{ $ck  := index $colorMap $cat | default "blue" }}
-    <article class="article-card group cursor-pointer">
-      <a href="{{ or .Params.externalUrl .RelPermalink }}" class="block">
-        <div class="aspect-[4/3] bg-surface-container overflow-hidden mb-5" style="border-radius:4px">
-          {{ if .Params.image }}
-          <img class="card-img-inner w-full h-full object-cover" src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
-          {{ else }}
-          <div class="card-img-inner w-full h-full bg-surface-container flex items-center justify-center">
-            <span class="font-headline text-3xl font-black text-outline-variant opacity-30">TC</span>
-          </div>
-          {{ end }}
+  <div class="grid">
+    {{ range first 5 $feed }}
+    {{- $cat := .Params.category | default "報導" -}}
+    {{- $ck  := index $colorMap $cat | default "blue" -}}
+    {{- $span := "col-4" -}}
+    {{- if eq (mod ($.Scratch.Get "idx" | default 0) 5) 0 -}}{{- $span = "col-8" -}}{{- end -}}
+    {{- $.Scratch.Set "idx" (add ($.Scratch.Get "idx" | default 0) 1) -}}
+    <a class="card {{ $span }}" data-cat="{{ $cat }}" href="{{ or .Params.externalUrl .RelPermalink }}">
+      <div class="card-img">
+        <span class="card-tag cat-chip cat-{{ $ck }}">{{ $cat }}</span>
+        {{ with .Params.readingTime }}<span class="card-stamp">{{ . }} Min</span>{{ end }}
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+        {{ end }}
+      </div>
+      <div class="card-body">
+        <h3 class="card-ttl">{{ .Title }}</h3>
+        <p class="card-sum">{{ .Params.summary | default (.Summary | plainify | truncate 90) }}</p>
+        <div class="card-meta">
+          <span>{{ .Date.Format "2006.01.02" }}</span><span class="card-meta-dot"></span>
+          {{ with .Params.author }}<span>By <b>{{ . }}</b></span><span class="card-meta-dot"></span>{{ end }}
+          {{ with .Params.views }}<span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
         </div>
-        <div class="space-y-3">
-          {{ if eq $ck "teal" }}
-          <span class="inline-block px-2.5 py-1 bg-brand-teal text-white text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "coral" }}
-          <span class="inline-block px-2.5 py-1 bg-brand-coral text-white text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else if eq $ck "yellow" }}
-          <span class="inline-block px-2.5 py-1 bg-brand-yellow text-brand-teal text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ else }}
-          <span class="inline-block px-2.5 py-1 bg-brand-blue text-brand-teal text-[10px] font-black font-label uppercase tracking-widest">{{ $cat }}</span>
-          {{ end }}
-          <h3 class="font-headline text-xl font-bold leading-snug text-on-surface group-hover:text-brand-teal transition-colors">
-            {{ .Title }}
-          </h3>
-          <p class="font-body text-sm text-on-surface-variant line-clamp-2 leading-relaxed">
-            {{ .Params.summary | default (.Summary | plainify | truncate 90) }}
-          </p>
-          <div class="flex items-center gap-2.5 pt-1 text-[11px] font-label font-bold uppercase tracking-tighter text-slate-400">
-            <time>{{ .Date.Format "2006年1月2日" }}</time>
-            <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
-            <span>{{ .ReadingTime }} 分鐘閱讀</span>
-          </div>
-        </div>
-      </a>
-    </article>
+      </div>
+    </a>
     {{ end }}
   </div>
-</section>
 
-<!-- ── DATA HUB BAND ──────────────────────────── -->
-<section class="bg-brand-teal py-24 text-white overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
-    <div class="lg:col-span-5 space-y-8">
-      <p class="font-label text-xs uppercase tracking-widest text-brand-blue opacity-80">數據核心</p>
-      <h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-        數字背後<br>才是真相。
-      </h2>
-      <p class="font-body text-slate-300 leading-relaxed">
-        THE COCOA 的每一篇報導都以可驗證的數據為基礎。我們的資料庫整合超過 200 個公開資料來源，每日更新，對所有讀者完全開放。
-      </p>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="p-5 bg-white/5 border border-white/10" style="border-radius:4px">
-          <div class="font-headline text-3xl font-bold text-brand-blue">200+</div>
-          <div class="font-label text-[10px] tracking-widest text-slate-400 uppercase mt-1">公開資料來源</div>
-        </div>
-        <div class="p-5 bg-white/5 border border-white/10" style="border-radius:4px">
-          <div class="font-headline text-3xl font-bold text-brand-coral">每日</div>
-          <div class="font-label text-[10px] tracking-widest text-slate-400 uppercase mt-1">數據更新頻率</div>
-        </div>
-      </div>
-      <a href="{{ "data/" | relURL }}" class="inline-block px-7 py-3 border border-white/20 text-white font-headline font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-brand-teal transition-all">
-        數據來源說明
-      </a>
-    </div>
-
-    <div class="lg:col-span-7">
-      <div class="bg-[#1e3f50] p-8 shadow-2xl border border-white/5" style="border-radius:8px">
-        <div class="flex justify-between items-center mb-10">
-          <span class="font-headline font-bold text-lg tracking-tight">熱門分類閱讀分布</span>
-          <div class="flex gap-2">
-            <div class="w-2.5 h-2.5 rounded-full bg-brand-blue"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-brand-coral"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-brand-yellow"></div>
-          </div>
-        </div>
-        <div class="space-y-6">
-          {{ $cats := slice
-            (dict "name" "居住正義" "pct" 84 "color" "bg-brand-yellow")
-            (dict "name" "科技社會" "pct" 76 "color" "bg-brand-blue")
-            (dict "name" "環境氣候" "pct" 61 "color" "bg-brand-coral")
-            (dict "name" "全球經濟" "pct" 55 "color" "bg-brand-blue")
-            (dict "name" "人口議題" "pct" 48 "color" "bg-brand-coral")
-          }}
-          {{ range $cats }}
-          <div class="space-y-1.5">
-            <div class="flex justify-between font-label text-[10px] font-bold uppercase tracking-widest text-slate-400">
-              <span>{{ .name }}</span>
-              <span>{{ .pct }}%</span>
-            </div>
-            <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full {{ .color }} rounded-full" style="width:{{ .pct }}%"></div>
-            </div>
-          </div>
-          {{ end }}
-        </div>
-      </div>
-    </div>
-
+  <!-- ═══ TOPICS ═══ -->
+  <div class="sec-head">
+    <h2 class="sec-ttl">正在追蹤 <span class="sec-num">— 02 / Topics</span></h2>
+    <span class="sec-sub">編輯室長期關注的議題</span>
   </div>
-</section>
+  <div class="topics">
+    {{ range .Site.Taxonomies.category.ByCount }}
+    <a class="topic" href="{{ "categories/" | relURL }}{{ .Page.Slug | urlize }}/">
+      <span class="topic-lb">{{ .Page.Title }}</span>
+      <span class="topic-n">{{ .Count }} Stories</span>
+    </a>
+    {{ end }}
+  </div>
 
-<!-- ── NEWSLETTER ─────────────────────────────── -->
-<section class="max-w-2xl mx-auto px-6 py-28 text-center">
-  <p class="font-label text-[10px] uppercase tracking-widest text-slate-400 mb-4">每週情報</p>
-  <h2 class="font-headline text-4xl font-extrabold text-brand-teal tracking-tight mb-5">為思考者準備的簡報。</h2>
-  <p class="font-body text-on-surface-variant mb-10 leading-relaxed">
-    每週日早晨，一封信。精選本週最值得閱讀的數據報導，沒有廢話，沒有追蹤。
-  </p>
-  <form class="flex flex-col sm:flex-row gap-0 shadow-sm">
-    <input type="email" placeholder="您的 Email 地址"
-      class="flex-1 px-5 py-4 bg-white border-2 border-slate-100 focus:border-brand-teal focus:ring-0 font-body text-sm text-on-surface placeholder:text-slate-300 transition-colors"
-      style="border-radius:0">
-    <button type="submit"
-      class="px-8 py-4 bg-brand-teal text-white font-headline font-black uppercase tracking-widest text-xs hover:bg-slate-800 transition-colors"
-      style="border-radius:0">
-      訂閱
-    </button>
-  </form>
-  <p class="font-label text-[10px] text-slate-300 uppercase tracking-widest mt-6">不追蹤 · 不轉售 · 隨時退訂</p>
-</section>
+  <!-- ═══ MOST READ ═══ -->
+  <div class="sec-head">
+    <h2 class="sec-ttl">本週熱讀 <span class="sec-num">— 03 / Most Read</span></h2>
+    <span class="sec-sub">依瀏覽量排序</span>
+  </div>
 
-</main>
-
-<!-- ── FOOTER ─────────────────────────────────── -->
-<footer class="bg-slate-50 border-t border-slate-100 py-16">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10">
-    <div class="md:col-span-4 space-y-4">
-      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
-      <p class="font-body text-sm text-slate-500 leading-relaxed max-w-xs">
-        以數據為核心的獨立新聞媒體。<br>每一個數字背後，都是一個值得說的故事。
-      </p>
-      <p class="font-label text-xs text-slate-400">© {{ now.Year }} THE COCOA. All rights reserved.</p>
-    </div>
-    <div class="md:col-span-2 flex flex-col gap-3">
-      <span class="font-label text-[11px] font-bold uppercase tracking-widest text-brand-teal">報導</span>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "hot/" | relURL }}">熱門文章</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "latest/" | relURL }}">最新文章</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "categories/" | relURL }}">所有分類</a>
-    </div>
-    <div class="md:col-span-2 flex flex-col gap-3">
-      <span class="font-label text-[11px] font-bold uppercase tracking-widest text-brand-teal">關於</span>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "about/" | relURL }}">認識我們</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "contact/" | relURL }}">加入我們</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "data/" | relURL }}">數據來源</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "privacy/" | relURL }}">隱私政策</a>
-    </div>
-    <div class="md:col-span-4">
-      <div class="bg-white p-5 border border-slate-200" style="border-radius:4px">
-        <span class="font-label text-[10px] font-bold uppercase tracking-widest text-slate-400">系統狀態</span>
-        <div class="flex items-center gap-2 mt-3">
-          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          <span class="font-headline text-sm font-bold text-brand-teal">所有服務正常運行</span>
-        </div>
-        <div class="mt-2 font-label text-[10px] text-slate-400">資料來源：內政部、主計總處、台電</div>
+  <div class="rank">
+    <div class="rank-col">
+      <div class="rank-head">
+        <span class="rank-ttl">讀者最熱讀</span>
+        <span class="rank-n">By Views</span>
       </div>
+      {{ range $i, $p := first 7 $byViews }}
+      <div class="rank-row">
+        <span class="rank-no">{{ printf "%02d" (add $i 1) }}</span>
+        <span class="rank-txt">{{ $p.Title }}<small>{{ $p.Params.category }}</small></span>
+        {{ with $p.Params.views }}<span class="rank-val">{{ . | lang.FormatNumber 0 }}</span>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+    <div class="rank-col">
+      <div class="rank-head">
+        <span class="rank-ttl"><span class="rank-pill" style="background:var(--tc-coral-deep)">Editor</span>編輯精選</span>
+        <span class="rank-n">Hand-Picked</span>
+      </div>
+      {{ range first 7 (after 7 $byViews) }}
+      <div class="rank-row">
+        <span class="rank-no">—</span>
+        <span class="rank-txt">{{ .Title }}<small>{{ .Params.category }}</small></span>
+        {{ with .Params.views }}<span class="rank-val">{{ . | lang.FormatNumber 0 }}</span>{{ end }}
+      </div>
+      {{ end }}
     </div>
   </div>
-</footer>
 
-</body>
-</html>
+  <!-- ═══ MORE REPORTS ═══ -->
+  <div class="sec-head">
+    <h2 class="sec-ttl">更多報導 <span class="sec-num">— 04 / More</span></h2>
+    <span class="sec-sub">長版文章與觀點</span>
+  </div>
+
+  <div class="grid">
+    {{ range first 5 (after 5 $feed) }}
+    {{- $cat := .Params.category | default "報導" -}}
+    {{- $ck  := index $colorMap $cat | default "blue" -}}
+    <a class="card col-4" data-cat="{{ $cat }}" href="{{ or .Params.externalUrl .RelPermalink }}">
+      <div class="card-img">
+        <span class="card-tag cat-chip cat-{{ $ck }}">{{ $cat }}</span>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+        {{ end }}
+      </div>
+      <div class="card-body">
+        <h3 class="card-ttl">{{ .Title }}</h3>
+        <p class="card-sum">{{ .Params.summary | default (.Summary | plainify | truncate 90) }}</p>
+        <div class="card-meta">
+          <span>{{ .Date.Format "2006.01.02" }}</span><span class="card-meta-dot"></span>
+          {{ with .Params.views }}<span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
+        </div>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+
+  <!-- ═══ NEWSLETTER BAND ═══ -->
+  <section class="band" id="newsletter">
+    <div>
+      <div class="band-kicker">Briefings for the Informed</div>
+      <h2 class="band-ttl">為思考者準備的<br>簡報。</h2>
+      <p class="band-sub">每週日早晨，一封信。<br>精選本週最值得閱讀的數據報導，沒有廢話，沒有追蹤。</p>
+    </div>
+    <div>
+      <form class="band-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='已訂閱 ✓'">
+        <input type="email" placeholder="您的 Email 地址" required>
+        <button type="submit">訂閱</button>
+      </form>
+      <div class="band-assure">不追蹤 · 不轉售 · 隨時退訂</div>
+    </div>
+  </section>
+
+</div>
+{{ end }}

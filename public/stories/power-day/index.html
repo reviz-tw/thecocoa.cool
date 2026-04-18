@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣的一天：電力從哪裡來？— THE COCOA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0B1422;
+  --bg2:      #0F1C30;
+  --bg3:      #162236;
+  --blue:     #1A4FA8;
+  --sky:      #74B1F5;
+  --lavender: #C1B5F5;
+  --yellow:   #F5F500;
+  --green:    #4ADE80;
+  --orange:   #FB923C;
+  --red:      #F87171;
+  --fg:       #E8EDF4;
+  --muted:    #4A6080;
+  --border:   rgba(116,177,245,0.12);
+  --radius:   12px;
+
+  /* energy colours */
+  --col-coal:   #6B7280;
+  --col-gas:    #FB923C;
+  --col-nuclear:#74B1F5;
+  --col-hydro:  #34D399;
+  --col-solar:  #F5F500;
+  --col-wind:   #C1B5F5;
+  --col-other:  #A78BFA;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a { color: var(--sky); text-decoration: none; }
+
+/* ── TOP BAR ───────────────────────────────── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  background: rgba(11,20,34,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 32px;
+  gap: 16px;
+}
+.topbar-back {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--muted);
+  transition: color .2s;
+}
+.topbar-back:hover { color: var(--sky); }
+.topbar-sep { color: var(--muted); }
+.topbar-title { font-size: 13px; color: var(--fg); font-weight: 500; flex: 1; }
+.topbar-logo { font-size: 13px; font-weight: 900; color: var(--sky); letter-spacing: .05em; }
+#progress-bar {
+  position: fixed; top: 52px; left: 0; z-index: 201;
+  height: 2px; width: 0%; background: var(--yellow);
+  transition: width .1s linear;
+}
+
+/* ── HERO ──────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; overflow: hidden;
+  padding: 52px 0 0;
+}
+.hero-canvas { position: absolute; inset: 0; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(11,20,34,1) 0%,
+    rgba(11,20,34,0.7) 40%,
+    rgba(11,20,34,0.2) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 860px;
+  padding: 0 56px 72px;
+}
+.hero-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--yellow);
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 24px;
+}
+.hero-title em { font-style: normal; color: var(--yellow); }
+.hero-sub {
+  font-size: 18px; line-height: 1.8;
+  color: rgba(232,237,244,0.7);
+  max-width: 600px; margin-bottom: 28px;
+}
+.hero-meta { font-size: 13px; color: var(--muted); }
+
+/* ── SECTIONS ──────────────────────────────── */
+section { padding: 100px 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+.container--narrow { max-width: 760px; margin: 0 auto; padding: 0 56px; }
+
+.section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sky);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(26px,3.5vw,44px);
+  font-weight: 900; line-height: 1.25;
+  margin-bottom: 24px;
+}
+.body-text {
+  font-size: 16px; line-height: 1.9;
+  color: rgba(232,237,244,0.75);
+  margin-bottom: 20px;
+}
+.alt-bg { background: var(--bg2); }
+
+/* ── BIG STAT ROW ──────────────────────────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  margin: 56px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stat-cell {
+  padding: 36px 28px;
+  background: var(--bg2);
+  text-align: center;
+}
+.stat-num {
+  font-size: clamp(36px,5vw,64px);
+  font-weight: 900; line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label { font-size: 13px; color: var(--muted); }
+
+/* ── 24H SLIDER SECTION ─────────────────────── */
+.clock-section { padding: 100px 0; }
+.clock-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 64px; align-items: start;
+}
+.clock-wrap {
+  position: relative;
+  width: 340px; height: 340px;
+  margin: 0 auto;
+}
+.clock-svg { width: 100%; height: 100%; }
+.clock-center-text { text-anchor: middle; dominant-baseline: middle; }
+
+.time-slider-wrap { margin-top: 32px; }
+.time-slider-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted);
+  margin-bottom: 8px;
+}
+#time-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+#time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--yellow);
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(245,245,0,0.2);
+}
+.current-time-display {
+  text-align: center; margin-top: 16px;
+  font-size: 48px; font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .06em;
+}
+.clock-legend { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--muted);
+}
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* source breakdown list */
+.source-list { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.source-row { display: flex; align-items: center; gap: 12px; }
+.source-name { font-size: 13px; font-weight: 600; width: 60px; flex-shrink: 0; }
+.source-bar-bg {
+  flex: 1; height: 8px; background: var(--bg3);
+  border-radius: 4px; overflow: hidden;
+}
+.source-bar-fill {
+  height: 100%; border-radius: 4px;
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+.source-pct { font-size: 12px; font-weight: 700; width: 36px; text-align: right; }
+
+/* ── STACKED BAR CHART ─────────────────────── */
+.stacked-chart {
+  margin-top: 48px;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 300px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.stacked-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.stacked-bar-wrap {
+  width: 100%; flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 4px 4px 0 0; overflow: hidden;
+}
+.stacked-bar-wrap:hover .stacked-seg { filter: brightness(1.15); }
+.stacked-seg {
+  width: 100%; height: 0;
+  transition: height 1.2s cubic-bezier(.34,1.56,.64,1);
+}
+.stacked-yr { font-size: 12px; color: var(--muted); margin-top: 8px; }
+.stacked-legend {
+  display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px;
+}
+
+/* ── PULL QUOTE ──────────────────────────────  */
+.pull-quote {
+  margin: 48px 0;
+  padding: 32px 36px;
+  border-left: 3px solid var(--yellow);
+  background: rgba(245,245,0,0.04);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 21px; font-weight: 700; line-height: 1.5; color: #fff;
+}
+
+/* ── CARBON GAUGE ────────────────────────────  */
+.gauge-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  align-items: center; margin-top: 48px;
+}
+.gauge-svg { width: 280px; display: block; margin: 0 auto; }
+.gauge-stats { display: flex; flex-direction: column; gap: 20px; }
+.gauge-stat-item { display: flex; flex-direction: column; gap: 4px; }
+.gauge-stat-num { font-size: 40px; font-weight: 900; line-height: 1; }
+.gauge-stat-label { font-size: 13px; color: var(--muted); }
+.gauge-stat-bar { height: 4px; border-radius: 2px; margin-top: 6px; }
+
+/* ── CLOSING ─────────────────────────────────  */
+.closing {
+  text-align: center;
+  padding: 100px 0 120px;
+  border-top: 1px solid var(--border);
+}
+.tag-chip {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px; color: var(--muted);
+  margin: 4px;
+  transition: border-color .2s, color .2s;
+}
+.tag-chip:hover { border-color: var(--sky); color: var(--sky); }
+.tag-chip--cat { background: rgba(116,177,245,.08); border-color: rgba(116,177,245,.3); color: var(--sky); font-weight: 600; }
+
+/* ── RESPONSIVE ──────────────────────────────  */
+@media (max-width: 768px) {
+  .hero-content { padding: 0 24px 56px; }
+  .container, .container--narrow { padding: 0 24px; }
+  section { padding: 64px 0; }
+  .stat-row { grid-template-columns: 1fr; }
+  .clock-layout { grid-template-columns: 1fr; }
+  .clock-wrap { width: 260px; height: 260px; }
+  .gauge-row { grid-template-columns: 1fr; }
+  .stacked-chart { height: 220px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <a href="/" class="topbar-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    首頁
+  </a>
+  <span class="topbar-sep">·</span>
+  <span class="topbar-title">台灣的一天：電力從哪裡來？</span>
+  <span class="topbar-logo">THE COCOA</span>
+</div>
+<div id="progress-bar"></div>
+
+<!-- HERO with animated canvas -->
+<div class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-kicker">互動數據報導 · 2025年能源專題</p>
+    <h1 class="hero-title">台灣的一天<br><em>電力從哪裡來？</em></h1>
+    <p class="hero-sub">每一秒，台灣電網都在做一道數學題：把數十種電力來源加總，剛好等於此刻全島的用電量。這道題，拖著 2,300 萬人的生活。</p>
+    <p class="hero-meta">THE COCOA 數據組 · 2025 年 3 月 · 資料來源：台電即時電力資訊</p>
+  </div>
+</div>
+
+<!-- SECTION 1 — Big numbers -->
+<section>
+  <div class="container--narrow">
+    <p class="section-label">基本數據</p>
+    <h2 class="section-title">先認識台灣電力的規模</h2>
+    <p class="body-text">台灣每年用電量約 <strong>2,800 億度</strong>，在全球排名第 20 位，相當於每人每年消耗 11,900 度——比歐盟平均高出近一倍。這些電，從哪裡來？怎麼用？在碳排放的壓力下，結構正在如何改變？</p>
+  </div>
+  <div class="container">
+    <div class="stat-row">
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--yellow)" id="cnt1">0</div>
+        <div class="stat-label">億度<br>年發電量（2024）</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--sky)" id="cnt2">0</div>
+        <div class="stat-label">%<br>再生能源佔比（2024）</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--green)" id="cnt3">0</div>
+        <div class="stat-label">%<br>十年減煤目標進度</div>
+      </div>
+    </div>
+    <p class="body-text">台電的電力調度中心，24 小時都在監控這張即時地圖。尖峰用電通常發生在夏季午後兩點——當全島冷氣齊開，太陽能也恰好達到最高輸出。但一旦雲層遮蔽，或者工廠轉班，備用容量就是那條最後防線。</p>
+  </div>
+</section>
+
+<!-- SECTION 2 — 24-hour clock -->
+<section class="alt-bg clock-section">
+  <div class="container">
+    <p class="section-label">互動圖表</p>
+    <h2 class="section-title">拖動時間軸——<br>看不同時段的電力組合</h2>
+    <div class="clock-layout">
+      <div>
+        <div class="clock-wrap">
+          <svg class="clock-svg" viewBox="0 0 340 340" id="clockSvg"></svg>
+        </div>
+        <div class="time-slider-wrap">
+          <div class="time-slider-label"><span>00:00</span><span>12:00</span><span>23:00</span></div>
+          <input type="range" id="time-slider" min="0" max="23" value="14">
+          <div class="current-time-display" id="timeDisplay">14:00</div>
+        </div>
+        <div class="clock-legend" id="clockLegend"></div>
+      </div>
+      <div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">各電源佔比</p>
+        <div class="source-list" id="sourceList"></div>
+        <p class="body-text" style="margin-top:28px;font-size:14px">夜間用電低谷（00:00–06:00）時，核能與燃煤扮演穩定基載的角色，因為它們無法快速啟停。白天太陽升起後，太陽能快速爬升；傍晚日落，天然氣機組接手填補缺口。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — Stacked bar (10 year trend) -->
+<section>
+  <div class="container--narrow">
+    <p class="section-label">十年趨勢</p>
+    <h2 class="section-title">從 2014 到 2024，<br>電力結構如何翻轉？</h2>
+    <p class="body-text">十年前，台灣的電力有 <strong>40%</strong> 來自燃煤，天然氣佔 <strong>30%</strong>，再生能源幾乎可以忽略不計。隨著離岸風電與屋頂太陽能的大規模建設，2024 年的電力組合已經發生了肉眼可見的結構性轉變——儘管許多人認為，速度還是不夠快。</p>
+  </div>
+  <div class="container">
+    <div class="stacked-chart" id="stackedChart"></div>
+    <div class="stacked-legend" id="stackedLegend"></div>
+    <div class="pull-quote">「不是沒有進步，而是氣候變遷跑得比我們更快。」</div>
+    <p class="body-text">台灣的核能政策在這十年間反覆拉扯——從非核家園到延役討論，每一次政策轉彎都在電力組合上留下印記。2025 年，核二、核三延役的討論再度浮上檯面，這場辯論的核心從來不只是能源，更是碳排放與能源安全的取捨。</p>
+  </div>
+</section>
+
+<!-- SECTION 4 — Carbon gauge -->
+<section class="alt-bg">
+  <div class="container--narrow">
+    <p class="section-label">碳排放</p>
+    <h2 class="section-title">電力碳排：我們距離目標還有多遠？</h2>
+    <p class="body-text">台灣的電力碳排放係數在 2022 年達到高峰後開始下降，但 2050 淨零目標意味著必須在 25 年內幾乎歸零。這個速度，需要的不只是更多風機和太陽能板，還需要整個電網的韌性改造。</p>
+  </div>
+  <div class="container">
+    <div class="gauge-row">
+      <div>
+        <svg class="gauge-svg" viewBox="0 0 280 200" id="gaugeSvg">
+          <!-- Background arc -->
+          <path d="M 30 160 A 110 110 0 0 1 250 160" fill="none" stroke="#1e2d45" stroke-width="22" stroke-linecap="round"/>
+          <!-- Progress arc (animated) -->
+          <path class="gauge-arc" d="M 30 160 A 110 110 0 0 1 250 160" fill="none" stroke="url(#gaugeGrad)" stroke-width="22" stroke-linecap="round"
+            stroke-dasharray="345" stroke-dashoffset="345"/>
+          <!-- Needle -->
+          <line id="gaugeNeedle" x1="140" y1="160" x2="140" y2="60"
+            stroke="var(--yellow)" stroke-width="2.5" stroke-linecap="round"
+            transform-origin="140 160"
+            style="transform: rotate(-90deg); transition: transform 1.8s cubic-bezier(.34,1.2,.64,1)"/>
+          <circle cx="140" cy="160" r="6" fill="var(--yellow)"/>
+          <!-- Labels -->
+          <text x="20" y="185" fill="var(--muted)" font-size="11" font-family="Noto Sans TC">0</text>
+          <text x="140" y="45" fill="var(--muted)" font-size="11" text-anchor="middle" font-family="Noto Sans TC">目標</text>
+          <text x="258" y="185" fill="var(--muted)" font-size="11" text-anchor="end" font-family="Noto Sans TC">1990</text>
+          <!-- Center value -->
+          <text x="140" y="135" fill="var(--fg)" font-size="32" font-weight="900" text-anchor="middle" font-family="Noto Sans TC" id="gaugeValue">--</text>
+          <text x="140" y="155" fill="var(--muted)" font-size="11" text-anchor="middle" font-family="Noto Sans TC">kg CO₂e / 度</text>
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="var(--green)"/>
+              <stop offset="60%" stop-color="var(--yellow)"/>
+              <stop offset="100%" stop-color="var(--red)"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="gauge-stats">
+        <div class="gauge-stat-item">
+          <span class="gauge-stat-num" style="color:var(--red)">0.509</span>
+          <span class="gauge-stat-label">2022 年峰值（kg CO₂e / 度）</span>
+          <div class="gauge-stat-bar" style="background:var(--red);width:100%"></div>
+        </div>
+        <div class="gauge-stat-item">
+          <span class="gauge-stat-num" style="color:var(--yellow)">0.494</span>
+          <span class="gauge-stat-label">2024 年現況（kg CO₂e / 度）</span>
+          <div class="gauge-stat-bar" style="background:var(--yellow);width:97%"></div>
+        </div>
+        <div class="gauge-stat-item">
+          <span class="gauge-stat-num" style="color:var(--green)">0.050</span>
+          <span class="gauge-stat-label">2050 淨零目標（kg CO₂e / 度）</span>
+          <div class="gauge-stat-bar" style="background:var(--green);width:10%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container--narrow">
+    <p class="section-label">結語</p>
+    <h2 class="section-title">這道題還沒有答案</h2>
+    <p class="body-text">台灣的電力轉型，是一場沒有退路的賽跑。氣候目標、能源安全、產業用電成本，三個方向各自拉扯。本報導的數據來源包括台電即時電力資訊、能源局年報、及 Our World in Data 能源資料庫。</p>
+    <p class="body-text">THE COCOA 將持續追蹤台灣能源議題。如有數據錯誤，請來信 <a href="mailto:data@thecocoa.cool">data@thecocoa.cool</a>。</p>
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px">
+      <a class="tag-chip tag-chip--cat" href="/categories/環境氣候/">環境氣候</a>
+      <a class="tag-chip" href="/tags/能源/"># 能源</a>
+      <a class="tag-chip" href="/tags/碳排放/"># 碳排放</a>
+      <a class="tag-chip" href="/tags/台電/"># 台電</a>
+      <a class="tag-chip" href="/tags/淨零/"># 淨零</a>
+    </div>
+    <div style="margin-top:48px">
+      <a href="/" style="display:inline-block;padding:12px 28px;border:1px solid var(--border);border-radius:24px;font-size:14px;font-weight:600;color:var(--muted);transition:all .2s" onmouseover="this.style.borderColor='var(--sky)';this.style.color='var(--sky)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← 回首頁</a>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── DATA ─────────────────────────────────── */
+const SOURCES = [
+  { id:'coal',   name:'燃煤',  color:'var(--col-coal)'   },
+  { id:'gas',    name:'天然氣',color:'var(--col-gas)'    },
+  { id:'nuclear',name:'核能',  color:'var(--col-nuclear)'},
+  { id:'solar',  name:'太陽能',color:'var(--col-solar)'  },
+  { id:'wind',   name:'風電',  color:'var(--col-wind)'   },
+  { id:'hydro',  name:'水力',  color:'var(--col-hydro)'  },
+  { id:'other',  name:'其他',  color:'var(--col-other)'  },
+];
+
+// hourly mix (pct, must sum to 100 per hour)
+const HOURLY = [
+  [38,28,14, 0, 4, 6,10], // 00
+  [36,28,15, 0, 5, 6,10], // 01
+  [35,27,16, 0, 6, 6,10], // 02
+  [35,26,17, 0, 6, 6,10], // 03
+  [34,26,18, 0, 6, 6,10], // 04
+  [33,26,18, 1, 7, 6, 9], // 05
+  [32,27,17, 4, 7, 6, 7], // 06
+  [31,28,15, 9, 7, 5, 5], // 07
+  [30,28,13,14, 7, 4, 4], // 08
+  [28,27,12,20, 7, 3, 3], // 09
+  [26,26,11,25, 7, 3, 2], // 10
+  [24,25,10,29, 7, 3, 2], // 11
+  [22,24, 9,32, 8, 3, 2], // 12
+  [23,25, 9,31, 7, 3, 2], // 13
+  [25,26,10,27, 7, 3, 2], // 14
+  [26,27,10,24, 7, 3, 3], // 15
+  [27,28,11,20, 7, 4, 3], // 16
+  [30,29,12,12, 7, 4, 6], // 17
+  [34,30,12, 3, 7, 5, 9], // 18
+  [36,30,13, 0, 6, 6, 9], // 19
+  [37,29,13, 0, 5, 7, 9], // 20
+  [38,29,14, 0, 5, 6, 8], // 21
+  [39,28,14, 0, 5, 6, 8], // 22
+  [39,28,14, 0, 5, 6, 8], // 23
+];
+
+const YEARS = [2014,2016,2018,2020,2022,2024];
+const YEAR_MIX = [
+  [40, 30, 18,  1,  0,  4,  7], // 2014
+  [38, 32, 16,  2,  1,  4,  7], // 2016
+  [35, 34, 12,  4,  2,  4,  9], // 2018
+  [33, 35,  9,  7,  4,  4,  8], // 2020
+  [36, 34,  8, 10,  6,  3,  3], // 2022
+  [29, 32,  8, 16, 10,  3,  2], // 2024
+];
+
+/* ── PROGRESS BAR ─────────────────────────── */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  document.getElementById('progress-bar').style.width = (pct * 100) + '%';
+});
+
+/* ── HERO CANVAS ─────────────────────────── */
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: Math.random() * 1920, y: Math.random() * 1080,
+      r: Math.random() * 1.8 + 0.4,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      alpha: Math.random() * 0.5 + 0.1,
+      hue: [210, 230, 60, 270][Math.floor(Math.random()*4)]
+    });
+  }
+
+  const LINES = [
+    {x1:0.1,y1:0.3,x2:0.5,y2:0.6,c:'rgba(116,177,245,0.06)'},
+    {x1:0.3,y1:0.1,x2:0.7,y2:0.8,c:'rgba(245,245,0,0.04)'},
+    {x1:0.6,y1:0.2,x2:0.9,y2:0.7,c:'rgba(193,181,245,0.05)'},
+    {x1:0.0,y1:0.6,x2:0.8,y2:0.4,c:'rgba(116,177,245,0.04)'},
+  ];
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // grid lines
+    LINES.forEach(l => {
+      ctx.beginPath();
+      ctx.moveTo(l.x1*W, l.y1*H);
+      ctx.lineTo(l.x2*W, l.y2*H);
+      ctx.strokeStyle = l.c;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+    // particles
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x % W, p.y % H, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue},80%,70%,${p.alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── COUNTERS ────────────────────────────── */
+function animCount(el, target, dur=1600) {
+  const start = performance.now();
+  const step = ts => {
+    const p = Math.min((ts-start)/dur, 1);
+    const e = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(e*target).toLocaleString();
+    if (p<1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const counterIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const t = e.target;
+    if (t.id==='cnt1') animCount(t, 2800);
+    if (t.id==='cnt2') animCount(t, 26);
+    if (t.id==='cnt3') animCount(t, 58);
+    counterIo.unobserve(t);
+  });
+}, {threshold:.5});
+['cnt1','cnt2','cnt3'].forEach(id => counterIo.observe(document.getElementById(id)));
+
+/* ── CLOCK / DONUT ───────────────────────── */
+const svg = document.getElementById('clockSvg');
+const CX=170, CY=170, R=130, SW=36;
+const TAU = Math.PI*2;
+const circumference = TAU*R;
+
+function polarToXY(angle, r) {
+  const a = angle - Math.PI/2;
+  return { x: CX + r*Math.cos(a), y: CY + r*Math.sin(a) };
+}
+
+function describeArc(startAngle, sweepAngle, r) {
+  const s = polarToXY(startAngle, r);
+  const e = polarToXY(startAngle + sweepAngle, r);
+  const largeArc = sweepAngle > Math.PI ? 1 : 0;
+  return `M ${s.x} ${s.y} A ${r} ${r} 0 ${largeArc} 1 ${e.x} ${e.y}`;
+}
+
+// Build SVG arcs
+const arcEls = {};
+SOURCES.forEach(s => {
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('fill','none');
+  path.setAttribute('stroke', s.color.startsWith('var') ? getComputedStyle(document.documentElement).getPropertyValue(s.color.slice(4,-1)) || '#888' : s.color);
+  path.setAttribute('stroke-width', SW);
+  path.setAttribute('stroke-linecap','butt');
+  path.style.transition = 'all .5s cubic-bezier(.4,0,.2,1)';
+  svg.insertBefore(path, svg.firstChild);
+  arcEls[s.id] = path;
+});
+
+// Center text
+const cTime = document.createElementNS('http://www.w3.org/2000/svg','text');
+cTime.setAttribute('x',CX); cTime.setAttribute('y',CY-12);
+cTime.setAttribute('text-anchor','middle'); cTime.setAttribute('fill','#e8edf4');
+cTime.setAttribute('font-size','22'); cTime.setAttribute('font-weight','900');
+cTime.setAttribute('font-family','Noto Sans TC');
+svg.appendChild(cTime);
+
+const cLabel = document.createElementNS('http://www.w3.org/2000/svg','text');
+cLabel.setAttribute('x',CX); cLabel.setAttribute('y',CY+14);
+cLabel.setAttribute('text-anchor','middle'); cLabel.setAttribute('fill','#4a6080');
+cLabel.setAttribute('font-size','12'); cLabel.setAttribute('font-family','Noto Sans TC');
+cLabel.textContent = '電力組合';
+svg.appendChild(cLabel);
+
+// Legend
+const legendEl = document.getElementById('clockLegend');
+SOURCES.forEach(s => {
+  const d = document.createElement('div');
+  d.className = 'legend-item';
+  const dot = document.createElement('span');
+  dot.className = 'legend-dot';
+  dot.style.background = s.color;
+  d.appendChild(dot);
+  d.appendChild(document.createTextNode(s.name));
+  legendEl.appendChild(d);
+});
+
+// Source bars
+const sourceList = document.getElementById('sourceList');
+const barEls = {};
+SOURCES.forEach(s => {
+  const row = document.createElement('div'); row.className='source-row';
+  const name = document.createElement('span'); name.className='source-name'; name.textContent=s.name;
+  const bg = document.createElement('div'); bg.className='source-bar-bg';
+  const fill = document.createElement('div'); fill.className='source-bar-fill';
+  fill.style.background = s.color;
+  bg.appendChild(fill);
+  const pct = document.createElement('span'); pct.className='source-pct';
+  row.append(name,bg,pct);
+  sourceList.appendChild(row);
+  barEls[s.id] = {fill, pct};
+});
+
+const colorMap = {
+  coal:   '#6B7280', gas:'#FB923C', nuclear:'#74B1F5',
+  solar:  '#F5F500', wind:'#C1B5F5', hydro:'#34D399', other:'#A78BFA'
+};
+
+function updateClock(hour) {
+  const mix = HOURLY[hour];
+  document.getElementById('timeDisplay').textContent = `${String(hour).padStart(2,'0')}:00`;
+  cTime.textContent = `${String(hour).padStart(2,'0')}:00`;
+
+  let angle = 0;
+  SOURCES.forEach((s,i) => {
+    const pct = mix[i]/100;
+    const sweep = pct * TAU;
+    if (pct < 0.005) {
+      arcEls[s.id].setAttribute('d','');
+    } else {
+      arcEls[s.id].setAttribute('d', describeArc(angle, sweep, R));
+    }
+    angle += sweep;
+
+    barEls[s.id].fill.style.width = mix[i]+'%';
+    barEls[s.id].pct.textContent = mix[i]+'%';
+    barEls[s.id].pct.style.color = colorMap[s.id];
+  });
+}
+
+const slider = document.getElementById('time-slider');
+slider.addEventListener('input', () => updateClock(+slider.value));
+updateClock(14);
+
+/* ── STACKED BAR CHART ───────────────────── */
+const chartEl = document.getElementById('stackedChart');
+const legendEl2 = document.getElementById('stackedLegend');
+const maxH = 260;
+
+YEARS.forEach((yr,yi) => {
+  const col = document.createElement('div'); col.className='stacked-col';
+  const wrap = document.createElement('div'); wrap.className='stacked-bar-wrap';
+  SOURCES.slice().reverse().forEach((s,si) => {
+    const seg = document.createElement('div'); seg.className='stacked-seg';
+    seg.style.background = colorMap[s.id];
+    seg.dataset.pct = YEAR_MIX[yi][SOURCES.length-1-si];
+    wrap.appendChild(seg);
+  });
+  const label = document.createElement('div'); label.className='stacked-yr'; label.textContent=yr;
+  col.append(wrap,label);
+  chartEl.appendChild(col);
+});
+
+SOURCES.forEach(s => {
+  const item = document.createElement('div'); item.className='legend-item';
+  const dot = document.createElement('span'); dot.className='legend-dot';
+  dot.style.background=colorMap[s.id];
+  item.append(dot, s.name);
+  legendEl2.appendChild(item);
+});
+
+const stackedIo = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) return;
+  document.querySelectorAll('.stacked-seg').forEach(seg => {
+    seg.style.height = seg.dataset.pct * maxH / 100 + 'px';
+  });
+  stackedIo.disconnect();
+}, {threshold:.2});
+stackedIo.observe(chartEl);
+
+/* ── GAUGE ───────────────────────────────── */
+const gaugeArc = document.querySelector('.gauge-arc');
+const gaugeNeedle = document.getElementById('gaugeNeedle');
+const gaugeValue = document.getElementById('gaugeValue');
+const totalArcLen = 345; // px (half circle with r=110)
+// 0.494 / 0.509 ≈ 97% of the way across the bad end
+const progress = 1 - (0.494 - 0.050) / (0.509 - 0.050); // ~3% from good end → 97% bad
+const offset = totalArcLen * (1 - (0.494 - 0.05) / (0.509 - 0.05));
+
+const gaugeIo = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) return;
+  gaugeArc.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1)';
+  gaugeArc.style.strokeDashoffset = totalArcLen * 0.03; // nearly full = very bad
+  // needle: -90deg = 0 (good), 0deg = bad end. current is ~97% bad = ~87deg
+  gaugeNeedle.style.transform = 'rotate(77deg)';
+  // animate value
+  const startTime = performance.now();
+  const step = ts => {
+    const p = Math.min((ts-startTime)/1500,1);
+    const e = 1-Math.pow(1-p,3);
+    gaugeValue.textContent = (0.05 + e*(0.494-0.05)).toFixed(3);
+    if (p<1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  gaugeIo.disconnect();
+}, {threshold:.3});
+gaugeIo.observe(document.getElementById('gaugeSvg'));
+</script>
+</body>
+</html>

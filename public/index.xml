@@ -1,67 +1,228 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>THE COCOA</title><link>https://example.github.io/thecocoa.cool/</link><description>Recent content on THE COCOA</description><generator>Hugo</generator><language>zh-tw</language><lastBuildDate>Sun, 15 Dec 2024 12:00:00 +0000</lastBuildDate><atom:link href="https://example.github.io/thecocoa.cool/index.xml" rel="self" type="application/rss+xml"/><item><title>為何傳統民調在 2024 年失去了魔法？</title><link>https://example.github.io/thecocoa.cool/posts/deep-analysis/</link><pubDate>Sun, 15 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/deep-analysis/</guid><description>分析數位時代下資訊同溫層如何干擾抽樣準確度，以及大數據預測的崛起與挑戰。</description></item><item><title>數據故事：被遺忘的角落</title><link>https://example.github.io/thecocoa.cool/posts/society/</link><pubDate>Sun, 01 Dec 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/society/</guid><description>在數據的地圖上，有些地方永遠是一片空白。我們走入這些被演算法忽略的邊緣地帶，記錄真實的生存樣態。</description></item><item><title>視覺專題：全球經濟地形圖</title><link>https://example.github.io/thecocoa.cool/posts/economy/</link><pubDate>Fri, 15 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/economy/</guid><description>重新定義國界的不再是政治，而是資金的流向與科技的供應鏈。我們繪製了二十一世紀的新商業版圖。</description></item><item><title>互動圖表：勞動力結構轉型</title><link>https://example.github.io/thecocoa.cool/posts/labor/</link><pubDate>Fri, 01 Nov 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/labor/</guid><description>探索 AI 浪潮如何重塑全球五大產業的職能需求與薪資結構，揭開自動化時代的職場真相。</description></item><item><title>氣候變遷下的高山生態</title><link>https://example.github.io/thecocoa.cool/posts/climate/</link><pubDate>Tue, 01 Oct 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/climate/</guid><description>隨著全球氣溫上升，高山植被線正在以前所未有的速度向上遷移，這對脆弱的生物多樣性意味著什麼？</description></item><item><title>數據解碼：城市發展的脈動</title><link>https://example.github.io/thecocoa.cool/posts/city/</link><pubDate>Sun, 01 Sep 2024 12:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/posts/city/</guid><description>透過數百萬筆即使數據，我們剖析了現代都市如何在繁華與擁擠之間找到生存的平衡點。</description></item><item><title>PODCAST</title><link>https://example.github.io/thecocoa.cool/podcast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/podcast/</guid><description>&lt;p>這是 &lt;code>PODCAST&lt;/code> 的預設頁面。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>THE COCOA</title><link>https://thecocoa.cool/</link><description>Recent content on THE COCOA</description><generator>Hugo</generator><language>zh-tw</language><lastBuildDate>Fri, 28 Mar 2025 08:00:00 +0000</lastBuildDate><atom:link href="https://thecocoa.cool/index.xml" rel="self" type="application/rss+xml"/><item><title>台灣的一天：電力從哪裡來？</title><link>https://thecocoa.cool/posts/power-day/</link><pubDate>Fri, 28 Mar 2025 08:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/power-day/</guid><description>拖動時間軸，看台灣每個時段的電力組合如何變化——從深夜的核能基載，到午後的太陽能高峰，再到黃昏的天然氣接手。</description></item><item><title>台灣房價地圖：30年的資產重分配</title><link>https://thecocoa.cool/posts/housing-map/</link><pubDate>Sat, 15 Mar 2025 08:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/housing-map/</guid><description>從1994到2024，台灣房價漲了幾倍？誰是贏家，誰是輸家？這張互動地圖，讓三十年的資產重分配一目了然。</description></item><item><title>少子化的真相：我們一直問錯了問題</title><link>https://thecocoa.cool/posts/birth-rate/</link><pubDate>Mon, 10 Feb 2025 10:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/birth-rate/</guid><description>台灣生育率全球墊底，但政府的政策回應一再聚焦在「補貼生育」。數據顯示，真正阻止年輕人生育的，從來不是錢。</description></item><item><title>台灣人還相信媒體嗎？</title><link>https://thecocoa.cool/posts/media-trust/</link><pubDate>Tue, 28 Jan 2025 07:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/media-trust/</guid><description>路透社新聞信任度調查顯示，台灣民眾對媒體的整體信任度僅 35%，低於全球平均。但細看數字，會發現一個更複雜的故事。</description></item><item><title>AI 取代了誰？五個產業的真實衝擊</title><link>https://thecocoa.cool/posts/ai-jobs/</link><pubDate>Mon, 20 Jan 2025 09:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/ai-jobs/</guid><description>不是每個職業都會消失，但幾乎每個職業都會被改變。我們追蹤了五個產業的第一線工作者，記錄 AI 真實的滲透速度。</description></item><item><title>台北房價 20 年：你買不起的到底是哪一棟</title><link>https://thecocoa.cool/posts/housing/</link><pubDate>Wed, 08 Jan 2025 08:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/housing/</guid><description>從 2004 年到 2024 年，台北市平均房價上漲了 312%，薪資只漲了 38%。這不是計算錯誤，這是政策選擇的結果。</description></item><item><title>為何傳統民調在 2024 年失去了魔法？</title><link>https://thecocoa.cool/posts/deep-analysis/</link><pubDate>Sun, 15 Dec 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/deep-analysis/</guid><description>分析數位時代下資訊同溫層如何干擾抽樣準確度，以及大數據預測的崛起與挑戰。</description></item><item><title>數據故事：被遺忘的角落</title><link>https://thecocoa.cool/posts/society/</link><pubDate>Sun, 01 Dec 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/society/</guid><description>在數據的地圖上，有些地方永遠是一片空白。我們走入這些被演算法忽略的邊緣地帶，記錄真實的生存樣態。</description></item><item><title>視覺專題：全球經濟地形圖</title><link>https://thecocoa.cool/posts/economy/</link><pubDate>Fri, 15 Nov 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/economy/</guid><description>重新定義國界的不再是政治，而是資金的流向與科技的供應鏈。我們繪製了二十一世紀的新商業版圖。</description></item><item><title>互動圖表：勞動力結構轉型</title><link>https://thecocoa.cool/posts/labor/</link><pubDate>Fri, 01 Nov 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/labor/</guid><description>探索 AI 浪潮如何重塑全球五大產業的職能需求與薪資結構，揭開自動化時代的職場真相。</description></item><item><title>氣候變遷下的高山生態</title><link>https://thecocoa.cool/posts/climate/</link><pubDate>Tue, 01 Oct 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/climate/</guid><description>隨著全球氣溫上升，高山植被線正在以前所未有的速度向上遷移，這對脆弱的生物多樣性意味著什麼？</description></item><item><title>數據解碼：城市發展的脈動</title><link>https://thecocoa.cool/posts/city/</link><pubDate>Sun, 01 Sep 2024 12:00:00 +0000</pubDate><guid>https://thecocoa.cool/posts/city/</guid><description>透過數百萬筆即時數據，我們剖析了現代都市如何在繁華與擁擠之間找到生存的平衡點。</description></item><item><title>PODCAST</title><link>https://thecocoa.cool/podcast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/podcast/</guid><description>&lt;p>這是 &lt;code>PODCAST&lt;/code> 的預設頁面。&lt;/p>
 &lt;p>你可以在這裡放：&lt;/p>
 &lt;ul>
 &lt;li>最新集數&lt;/li>
 &lt;li>節目分類&lt;/li>
 &lt;li>平台收聽連結&lt;/li>
-&lt;/ul></description></item><item><title>加入我們</title><link>https://example.github.io/thecocoa.cool/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/contact/</guid><description>&lt;p>這是 &lt;code>加入我們&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>你可以在這裡放：&lt;/p>
-&lt;ul>
-&lt;li>職缺資訊&lt;/li>
-&lt;li>投稿與合作方式&lt;/li>
-&lt;li>聯絡信箱與表單&lt;/li>
-&lt;/ul></description></item><item><title>影音</title><link>https://example.github.io/thecocoa.cool/video/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/video/</guid><description>&lt;p>這是 &lt;code>影音&lt;/code> 的預設頁面。&lt;/p>
+&lt;/ul></description></item><item><title>加入我們</title><link>https://thecocoa.cool/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/contact/</guid><description>&lt;h2 id="我們在找什麼樣的人">我們在找什麼樣的人&lt;/h2>
+&lt;p>THE COCOA 不只是在招募人才，我們在尋找共同創造者。我們希望你不只把這裡當作一份工作，而是一個能讓自己的想法真正被看見的地方。&lt;/p>
+&lt;p>目前我們特別需要以下領域的夥伴：&lt;/p>
+&lt;h3 id="數據新聞記者">數據新聞記者&lt;/h3>
+&lt;p>你對公共事務有強烈好奇心，能自己查找並分析政府開放數據、學術研究或企業財報，並將發現轉化成引人入勝的報導。熟悉 Python 或 R 者優先。&lt;/p>
+&lt;h3 id="資料視覺化設計師">資料視覺化設計師&lt;/h3>
+&lt;p>你擅長將複雜數據轉化為直覺易懂的圖表與互動式視覺作品。熟悉 D3.js、Figma，並對新聞設計有獨到見解。&lt;/p>
+&lt;h3 id="全端工程師兼職">全端工程師（兼職）&lt;/h3>
+&lt;p>協助開發與維護本網站的互動報導功能、讀者訂閱系統與數據管線。熟悉 Hugo、React 或 Go 者佳。&lt;/p>
+&lt;h3 id="讀者投書">讀者投書&lt;/h3>
+&lt;p>即使你不是要應徵職位，只要你有獨到觀點、完整的數據分析，我們歡迎投書。來稿請寄至 &lt;strong>&lt;a href="mailto:editor@thecocoa.cool">editor@thecocoa.cool&lt;/a>&lt;/strong>，並於主旨標明「讀者投書」。&lt;/p>
+&lt;h2 id="合作方式">合作方式&lt;/h2>
+&lt;h3 id="研究機構--媒體合作">研究機構 × 媒體合作&lt;/h3>
+&lt;p>如果您的組織有值得公開的研究成果，卻苦於缺乏傳播管道，我們很樂意協助將嚴謹的學術發現轉化為大眾能閱讀的報導。&lt;/p>
+&lt;h3 id="品牌內容合作">品牌內容合作&lt;/h3>
+&lt;p>我們接受與本媒體調性相符的品牌原生內容合作，但所有商業合作內容均會清楚標示，且不干預編輯台的獨立判斷。&lt;/p>
+&lt;h2 id="聯絡資訊">聯絡資訊&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>事項&lt;/th>
+ &lt;th>信箱&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>職缺應徵&lt;/td>
+ &lt;td>&lt;a href="mailto:jobs@thecocoa.cool">jobs@thecocoa.cool&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>讀者投書&lt;/td>
+ &lt;td>&lt;a href="mailto:editor@thecocoa.cool">editor@thecocoa.cool&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>商業合作&lt;/td>
+ &lt;td>&lt;a href="mailto:partnership@thecocoa.cool">partnership@thecocoa.cool&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>一般詢問&lt;/td>
+ &lt;td>&lt;a href="mailto:hi@thecocoa.cool">hi@thecocoa.cool&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>我們通常在 3 個工作日內回覆。&lt;/p></description></item><item><title>影音</title><link>https://thecocoa.cool/video/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/video/</guid><description>&lt;p>這是 &lt;code>影音&lt;/code> 的預設頁面。&lt;/p>
 &lt;p>你可以在這裡放：&lt;/p>
 &lt;ul>
 &lt;li>影片報導&lt;/li>
 &lt;li>專題短片&lt;/li>
 &lt;li>直播與回放整理&lt;/li>
-&lt;/ul></description></item><item><title>數據來源聲明</title><link>https://example.github.io/thecocoa.cool/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/data/</guid><description>&lt;p>這是 &lt;code>數據來源聲明&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>建議你在這裡補上：&lt;/p>
+&lt;/ul></description></item><item><title>數據來源聲明</title><link>https://thecocoa.cool/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/data/</guid><description>&lt;h2 id="為何需要這份聲明">為何需要這份聲明&lt;/h2>
+&lt;p>數據新聞的可信度，取決於數據本身的可信度。我們要求每一篇報導的作者在發布前提交完整的數據文件，包括原始來源、清洗步驟與分析程式碼。本頁面是對讀者的公開承諾。&lt;/p>
+&lt;h2 id="主要數據來源">主要數據來源&lt;/h2>
+&lt;h3 id="政府開放資料">政府開放資料&lt;/h3>
 &lt;ul>
-&lt;li>資料來源列表&lt;/li>
-&lt;li>清理與分析方法&lt;/li>
-&lt;li>更新頻率與限制說明&lt;/li>
-&lt;/ul></description></item><item><title>最愛</title><link>https://example.github.io/thecocoa.cool/favorites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/favorites/</guid><description>&lt;p>這是 &lt;code>最愛&lt;/code> 的預設頁面。&lt;/p>
+&lt;li>&lt;strong>政府資料開放平臺&lt;/strong>（data.gov.tw）：各部會統計數據&lt;/li>
+&lt;li>&lt;strong>主計總處&lt;/strong>：國民所得、就業與薪資統計&lt;/li>
+&lt;li>&lt;strong>內政部統計處&lt;/strong>：人口、地籍與住宅數據&lt;/li>
+&lt;li>&lt;strong>衛生福利部&lt;/strong>：醫療、社福與公共衛生統計&lt;/li>
+&lt;li>&lt;strong>教育部統計處&lt;/strong>：學校、學生與教師相關數據&lt;/li>
+&lt;li>&lt;strong>環境部&lt;/strong>：空氣品質、氣候與環境監測數據&lt;/li>
+&lt;/ul>
+&lt;h3 id="國際數據庫">國際數據庫&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>世界銀行開放數據&lt;/strong>（data.worldbank.org）&lt;/li>
+&lt;li>&lt;strong>聯合國數據&lt;/strong>（data.un.org）&lt;/li>
+&lt;li>&lt;strong>Our World in Data&lt;/strong>（ourworldindata.org）&lt;/li>
+&lt;li>&lt;strong>OECD.Stat&lt;/strong>：經濟合作暨發展組織統計資料庫&lt;/li>
+&lt;li>&lt;strong>IMF Data&lt;/strong>：國際貨幣基金組織數據&lt;/li>
+&lt;/ul>
+&lt;h3 id="學術與研究機構">學術與研究機構&lt;/h3>
+&lt;p>我們會在個別報導中標明引用的學術論文，並提供 DOI 連結供讀者查閱原始研究。&lt;/p>
+&lt;h2 id="數據處理方法">數據處理方法&lt;/h2>
+&lt;h3 id="清洗原則">清洗原則&lt;/h3>
+&lt;ul>
+&lt;li>所有數據在分析前均會進行格式標準化與異常值檢查&lt;/li>
+&lt;li>遺漏值的處理方式（刪除、插補或保留）會在報導中說明&lt;/li>
+&lt;li>匯率換算以報導發布當日中央銀行公告匯率為基準&lt;/li>
+&lt;/ul>
+&lt;h3 id="視覺化設計">視覺化設計&lt;/h3>
+&lt;ul>
+&lt;li>圖表的 Y 軸預設從零開始，若有特殊需求則會加注說明&lt;/li>
+&lt;li>比較性圖表會使用一致的時間範圍與單位&lt;/li>
+&lt;li>所有圖表均標示資料來源與最後更新日期&lt;/li>
+&lt;/ul>
+&lt;h3 id="程式碼公開">程式碼公開&lt;/h3>
+&lt;p>我們使用 Python（pandas、matplotlib）與 R（tidyverse、ggplot2）進行數據分析。主要報導的分析程式碼會公開於 GitHub：&lt;strong>github.com/thecocoa/data&lt;/strong>&lt;/p>
+&lt;h2 id="數據限制說明">數據限制說明&lt;/h2>
+&lt;p>我們承認，所有數據都有其局限性：&lt;/p>
+&lt;p>&lt;strong>抽樣誤差&lt;/strong>：問卷調查數據具有抽樣誤差，我們會標示信心區間。&lt;/p>
+&lt;p>&lt;strong>時間落差&lt;/strong>：政府統計數據通常有 6 至 18 個月的發布延遲，分析時我們會說明數據的所屬期間。&lt;/p>
+&lt;p>&lt;strong>定義差異&lt;/strong>：不同國家或機構對同一指標的定義可能不同（例如「失業率」的計算方式），我們會在跨國比較時特別說明。&lt;/p>
+&lt;p>&lt;strong>相關≠因果&lt;/strong>：我們嚴格區分相關性與因果關係，不在數據不足以支撐的情況下宣稱因果。&lt;/p>
+&lt;h2 id="錯誤更正政策">錯誤更正政策&lt;/h2>
+&lt;p>若我們的報導存在數據錯誤，我們承諾：&lt;/p>
+&lt;ol>
+&lt;li>在原文頂部加注更正說明，並保留原文供讀者比對&lt;/li>
+&lt;li>透過電子報通知已閱讀該報導的訂閱者&lt;/li>
+&lt;li>公開說明錯誤原因與更正內容&lt;/li>
+&lt;/ol>
+&lt;p>如您發現我們報導中的數據問題，請來信：&lt;strong>&lt;a href="mailto:editor@thecocoa.cool">editor@thecocoa.cool&lt;/a>&lt;/strong>，主旨標明「數據更正」。&lt;/p>
+&lt;h2 id="更新頻率">更新頻率&lt;/h2>
+&lt;p>持續追蹤系列報導的數據每季更新一次。重大政策或事件發生時，相關數據頁面將即時更新。每份數據集的最後更新日期均標示於圖表下方。&lt;/p></description></item><item><title>最愛</title><link>https://thecocoa.cool/favorites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/favorites/</guid><description>&lt;p>這是 &lt;code>最愛&lt;/code> 的預設頁面。&lt;/p>
 &lt;p>你可以在這裡放：&lt;/p>
 &lt;ul>
 &lt;li>使用者收藏文章&lt;/li>
 &lt;li>編輯精選清單&lt;/li>
 &lt;li>推薦閱讀集合&lt;/li>
-&lt;/ul></description></item><item><title>最新</title><link>https://example.github.io/thecocoa.cool/latest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/latest/</guid><description>&lt;p>這是 &lt;code>最新&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>你可以在這裡放：&lt;/p>
+&lt;/ul></description></item><item><title>最新文章</title><link>https://thecocoa.cool/latest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/latest/</guid><description/></item><item><title>服務條款</title><link>https://thecocoa.cool/terms/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/terms/</guid><description>&lt;p>最後更新日期：2024 年 12 月 1 日&lt;/p>
+&lt;h2 id="接受條款">接受條款&lt;/h2>
+&lt;p>歡迎使用 THE COCOA（thecocoa.cool）。本服務條款（「條款」）規範您對本網站的使用方式。存取或使用本網站，即表示您同意受本條款約束。&lt;/p>
+&lt;h2 id="智慧財產權">智慧財產權&lt;/h2>
+&lt;h3 id="本媒體的內容">本媒體的內容&lt;/h3>
+&lt;p>本網站所有文章、圖表、數據視覺化作品、設計及程式碼，除另有標示外，均屬 THE COCOA 所有，受中華民國著作權法保護。&lt;/p>
+&lt;p>未經書面授權，禁止以任何形式重製、散布、公開播送或改作本網站內容。&lt;/p>
+&lt;h3 id="合理使用">合理使用&lt;/h3>
+&lt;p>以下情形視為合理使用，無需另行申請授權：&lt;/p>
 &lt;ul>
-&lt;li>最新發布文章列表&lt;/li>
-&lt;li>依時間排序的快訊&lt;/li>
-&lt;li>編輯推薦新內容&lt;/li>
-&lt;/ul></description></item><item><title>服務條款</title><link>https://example.github.io/thecocoa.cool/terms/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/terms/</guid><description>&lt;p>這是 &lt;code>服務條款&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>建議你在這裡補上：&lt;/p>
+&lt;li>個人非商業性閱讀與分享連結&lt;/li>
+&lt;li>新聞引用（需標明出處，引用篇幅不得超過原文三分之一）&lt;/li>
+&lt;li>學術研究（需完整標注來源）&lt;/li>
+&lt;/ul>
+&lt;p>如需商業授權，請聯絡 &lt;strong>&lt;a href="mailto:partnership@thecocoa.cool">partnership@thecocoa.cool&lt;/a>&lt;/strong>。&lt;/p>
+&lt;h2 id="使用規範">使用規範&lt;/h2>
+&lt;p>使用本網站時，您同意不得：&lt;/p>
 &lt;ul>
-&lt;li>使用規範&lt;/li>
-&lt;li>內容授權與限制&lt;/li>
-&lt;li>免責聲明&lt;/li>
-&lt;/ul></description></item><item><title>熱門</title><link>https://example.github.io/thecocoa.cool/hot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/hot/</guid><description>&lt;p>這是 &lt;code>熱門&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>你可以在這裡放：&lt;/p>
-&lt;ul>
-&lt;li>近 24 小時熱門文章&lt;/li>
-&lt;li>近 7 日討論度最高主題&lt;/li>
-&lt;li>社群分享排行&lt;/li>
-&lt;/ul></description></item><item><title>觀點</title><link>https://example.github.io/thecocoa.cool/opinions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/opinions/</guid><description>&lt;p>這是 &lt;code>觀點&lt;/code> 的預設頁面。&lt;/p>
+&lt;li>以自動化工具大量擷取本網站內容（爬蟲）&lt;/li>
+&lt;li>利用本網站從事任何違法或侵害他人權益的行為&lt;/li>
+&lt;li>散布不實資訊或以本媒體名義進行詐騙&lt;/li>
+&lt;li>干擾或破壞本網站的正常運作&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用者提交內容">使用者提交內容&lt;/h2>
+&lt;p>若您透過聯絡表單、讀者投書或其他方式向本媒體提交內容，即代表您授予本媒體非獨家、免授權金的使用權，本媒體得以編輯、發布及推廣該內容。&lt;/p>
+&lt;h2 id="免責聲明">免責聲明&lt;/h2>
+&lt;h3 id="內容準確性">內容準確性&lt;/h3>
+&lt;p>本媒體致力於確保報導的準確性，但不保證所有資訊均無誤。讀者應自行對重要決策進行驗證。本網站內容不構成任何法律、財務或醫療建議。&lt;/p>
+&lt;h3 id="服務中斷">服務中斷&lt;/h3>
+&lt;p>本媒體不保證網站的持續可用性，並保留隨時調整、暫停或終止任何服務的權利，且無需事先通知。&lt;/p>
+&lt;h3 id="外部連結">外部連結&lt;/h3>
+&lt;p>本網站可能包含連結至第三方網站。本媒體對該等網站的內容與隱私做法不負任何責任。&lt;/p>
+&lt;h2 id="條款修改">條款修改&lt;/h2>
+&lt;p>本媒體保留隨時修改本條款的權利。重大變更將於本頁面公告。繼續使用本網站即視為接受修改後的條款。&lt;/p>
+&lt;h2 id="準據法">準據法&lt;/h2>
+&lt;p>本條款之解釋與適用，以中華民國法律為準據法。如有爭議，雙方同意以台灣台北地方法院為第一審管轄法院。&lt;/p>
+&lt;h2 id="聯絡我們">聯絡我們&lt;/h2>
+&lt;p>服務條款相關疑問請來信：&lt;strong>&lt;a href="mailto:legal@thecocoa.cool">legal@thecocoa.cool&lt;/a>&lt;/strong>&lt;/p></description></item><item><title>熱門文章</title><link>https://thecocoa.cool/hot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/hot/</guid><description/></item><item><title>觀點</title><link>https://thecocoa.cool/opinions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/opinions/</guid><description>&lt;p>這是 &lt;code>觀點&lt;/code> 的預設頁面。&lt;/p>
 &lt;p>你可以在這裡放：&lt;/p>
 &lt;ul>
 &lt;li>專欄與社論&lt;/li>
 &lt;li>作者觀點文章&lt;/li>
 &lt;li>議題評論彙整&lt;/li>
-&lt;/ul></description></item><item><title>關於 THE COCOA</title><link>https://example.github.io/thecocoa.cool/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/about/</guid><description>&lt;p>這是 &lt;code>關於我們&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>你可以在這裡放：&lt;/p>
+&lt;/ul></description></item><item><title>關於 THE COCOA</title><link>https://thecocoa.cool/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/about/</guid><description>&lt;h2 id="我們是誰">我們是誰&lt;/h2>
+&lt;p>THE COCOA 是一個以數據驅動的數位媒體，成立於 2023 年。我們的核心信念是：在這個資訊過載的時代，真正有價值的新聞不是最快的那一則，而是最清楚的那一則。&lt;/p>
+&lt;p>我們專注於將複雜的社會、經濟、環境議題，透過數據視覺化與深度報導，轉化為任何人都能理解的故事。每一篇文章的背後，都有大量的數據清洗、交叉比對與事實查核工作。&lt;/p>
+&lt;h2 id="我們的核心價值">我們的核心價值&lt;/h2>
+&lt;h3 id="數據為本">數據為本&lt;/h3>
+&lt;p>所有報導皆以可查證的公開數據為基礎。我們會清楚標示資料來源、樣本大小與分析方法，讓讀者自行判斷。&lt;/p>
+&lt;h3 id="深度優先">深度優先&lt;/h3>
+&lt;p>我們不追求即時，我們追求正確。寧可晚一天發布，也不允許誤導性的標題或不完整的脈絡。&lt;/p>
+&lt;h3 id="視覺清晰">視覺清晰&lt;/h3>
+&lt;p>數據若沒有好的呈現方式，等於沒有說服力。我們在每一張圖表的設計上投入與文字同等的心力。&lt;/p>
+&lt;h3 id="獨立編輯">獨立編輯&lt;/h3>
+&lt;p>THE COCOA 不接受任何廣告主對報導方向的干預。我們的收入來自讀者訂閱與公益性質的研究合作，編輯台與商業部門之間設有明確的防火牆。&lt;/p>
+&lt;h2 id="我們的團隊">我們的團隊&lt;/h2>
+&lt;p>THE COCOA 由一群來自新聞、數據科學、設計與軟體工程背景的工作者共同組成。我們相信跨領域的協作，是製作出好作品的唯一方式。&lt;/p>
+&lt;p>目前核心團隊共 11 人，分布於台北、台中與高雄。&lt;/p>
+&lt;h2 id="聯絡我們">聯絡我們&lt;/h2>
+&lt;p>如有採訪合作、內容授權或其他媒體相關詢問，歡迎來信：&lt;/p>
+&lt;p>&lt;strong>編輯台：&lt;/strong> &lt;a href="mailto:editor@thecocoa.cool">editor@thecocoa.cool&lt;/a>&lt;br>
+&lt;strong>商業合作：&lt;/strong> &lt;a href="mailto:partnership@thecocoa.cool">partnership@thecocoa.cool&lt;/a>&lt;br>
+&lt;strong>技術問題：&lt;/strong> &lt;a href="mailto:hi@thecocoa.cool">hi@thecocoa.cool&lt;/a>&lt;/p></description></item><item><title>隱私權政策</title><link>https://thecocoa.cool/privacy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://thecocoa.cool/privacy/</guid><description>&lt;p>最後更新日期：2024 年 12 月 1 日&lt;/p>
+&lt;h2 id="總則">總則&lt;/h2>
+&lt;p>THE COCOA（以下簡稱「本媒體」）深知個人隱私的重要性。本政策說明我們在您使用本網站（thecocoa.cool）時，如何蒐集、使用、儲存及保護您的個人資料。&lt;/p>
+&lt;p>使用本網站即表示您同意本隱私權政策的內容。若您不同意，請停止使用本網站。&lt;/p>
+&lt;h2 id="我們蒐集的資料">我們蒐集的資料&lt;/h2>
+&lt;h3 id="您主動提供的資料">您主動提供的資料&lt;/h3>
 &lt;ul>
-&lt;li>品牌理念&lt;/li>
-&lt;li>團隊介紹&lt;/li>
-&lt;li>發展里程碑&lt;/li>
-&lt;/ul></description></item><item><title>隱私權政策</title><link>https://example.github.io/thecocoa.cool/privacy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.github.io/thecocoa.cool/privacy/</guid><description>&lt;p>這是 &lt;code>隱私權政策&lt;/code> 的預設頁面。&lt;/p>
-&lt;p>建議你在這裡補上：&lt;/p>
+&lt;li>訂閱電子報時填寫的電子郵件地址&lt;/li>
+&lt;li>透過聯絡表單提交的姓名與訊息內容&lt;/li>
+&lt;li>加入會員時填寫的帳號資訊&lt;/li>
+&lt;/ul>
+&lt;h3 id="自動蒐集的資料">自動蒐集的資料&lt;/h3>
 &lt;ul>
-&lt;li>資料蒐集類型&lt;/li>
-&lt;li>使用目的與保存期限&lt;/li>
-&lt;li>使用者權利與聯絡窗口&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;li>瀏覽器類型與作業系統&lt;/li>
+&lt;li>造訪頁面、停留時間與點擊行為（透過匿名化分析工具）&lt;/li>
+&lt;li>IP 位址（經過遮罩處理，不用於個人識別）&lt;/li>
+&lt;li>Cookie 與類似技術（詳見下方說明）&lt;/li>
+&lt;/ul>
+&lt;h2 id="資料使用目的">資料使用目的&lt;/h2>
+&lt;p>我們使用您的資料以：&lt;/p>
+&lt;ul>
+&lt;li>發送您訂閱的電子報&lt;/li>
+&lt;li>回應您的詢問與意見回饋&lt;/li>
+&lt;li>分析網站使用情況以改善內容品質&lt;/li>
+&lt;li>偵測並防止濫用行為&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>我們不會&lt;/strong>將您的個人資料出售、出租或以任何形式提供給第三方廣告商。&lt;/p>
+&lt;h2 id="cookie-政策">Cookie 政策&lt;/h2>
+&lt;p>本網站使用以下類型的 Cookie：&lt;/p>
+&lt;h3 id="必要性-cookie">必要性 Cookie&lt;/h3>
+&lt;p>維持網站基本功能所必需，無法關閉。&lt;/p>
+&lt;h3 id="分析性-cookie">分析性 Cookie&lt;/h3>
+&lt;p>幫助我們了解讀者如何使用本網站。我們使用自行架設的 Umami Analytics，所有數據儲存於台灣境內伺服器，不與任何第三方共享。&lt;/p>
+&lt;p>您可透過瀏覽器設定拒絕非必要性 Cookie。&lt;/p>
+&lt;h2 id="資料保存期限">資料保存期限&lt;/h2>
+&lt;ul>
+&lt;li>電子報訂閱資料：保存至您取消訂閱後 30 日&lt;/li>
+&lt;li>聯絡紀錄：保存 2 年&lt;/li>
+&lt;li>匿名化分析數據：保存 13 個月&lt;/li>
+&lt;/ul>
+&lt;h2 id="您的權利">您的權利&lt;/h2>
+&lt;p>依據《個人資料保護法》，您有權：&lt;/p>
+&lt;ul>
+&lt;li>查詢及閱覽本媒體保有的您的個人資料&lt;/li>
+&lt;li>請求更正不正確的個人資料&lt;/li>
+&lt;li>請求刪除您的個人資料&lt;/li>
+&lt;li>拒絕本媒體處理您的個人資料&lt;/li>
+&lt;/ul>
+&lt;p>如需行使上述權利，請來信 &lt;strong>&lt;a href="mailto:privacy@thecocoa.cool">privacy@thecocoa.cool&lt;/a>&lt;/strong>，我們將於 15 個工作日內回覆。&lt;/p>
+&lt;h2 id="政策異動">政策異動&lt;/h2>
+&lt;p>本政策如有重大變更，我們將於本頁面公告，並透過電子報通知訂閱者。建議您定期查閱本頁面。&lt;/p>
+&lt;h2 id="聯絡我們">聯絡我們&lt;/h2>
+&lt;p>隱私權相關事務請聯絡：privacy@thecocoa.cool&lt;/p></description></item></channel></rss>

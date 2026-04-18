@@ -1,149 +1,31 @@
+{{ define "main" }}
 {{- $colorMap := dict
       "科技社會" "teal"  "城市發展" "teal"
       "環境氣候" "coral" "人口議題" "coral"
       "全球經濟" "yellow" "深度分析" "yellow" "居住正義" "yellow"
       "社會議題" "blue"  "勞動市場" "blue"  "媒體觀察" "blue" -}}
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>所有分類 | TheCocoa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@400;700;800&family=Manrope:wght@400;500;700&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "brand-teal":   "#2B5F75",
-        "brand-blue":   "#81C7D4",
-        "brand-coral":  "#EEA9A9",
-        "brand-yellow": "#F7D94C",
-        "on-surface":   "#191C1D",
-        "on-surface-variant": "#41484C",
-        "surface-container": "#EDEEF0",
-      },
-      fontFamily: {
-        headline: ["Space Grotesk","sans-serif"],
-        body:     ["Manrope","sans-serif"],
-        label:    ["Work Sans","sans-serif"],
-      },
-    }
-  }
-}
-</script>
-<style>
-  *{box-sizing:border-box;}
-  body{font-family:'Manrope',sans-serif;background:#fdfdfd;color:#191c1d;}
-  .term-card{transition:border-color .2s,background .2s;}
-  .term-card:hover{background:#f8fafc;border-color:#2B5F75;}
 
-  /* ── Logo ──────────────────────────────────────── */
-  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
-  .tc-logo-sm{font-size:1.375rem;}
-  .tc-logo-lg{font-size:1.5rem;}
-</style>
-</head>
-<body class="bg-white antialiased">
+<div class="page">
 
-<!-- NAV -->
-<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-10">
-      <a href="{{ "" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="{{ "categories/社會議題/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">社會</a>
-        <a href="{{ "categories/全球經濟/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">經濟</a>
-        <a href="{{ "categories/科技社會/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">科技</a>
-        <a href="{{ "categories/環境氣候/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">環境</a>
-        <a href="{{ "hot/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">熱門</a>
-        <a href="{{ "latest/" | relURL }}" class="font-headline font-bold text-sm text-slate-400 hover:text-brand-teal transition-colors">最新</a>
-      </nav>
+  <section class="ph">
+    <div>
+      <p class="ph-kicker">THE COCOA<span class="ph-dot"></span>{{ .Title }}</p>
+      <h1 class="ph-ttl">所有<em>分類</em>。</h1>
     </div>
-    <a href="{{ "categories/" | relURL }}" class="hidden md:inline-flex items-center px-4 py-1.5 border border-brand-teal text-brand-teal text-xs font-label font-semibold uppercase tracking-widest bg-brand-teal/5">所有分類</a>
-  </div>
-</header>
-
-<main class="pt-16">
-
-  <!-- PAGE HEADER -->
-  <div class="max-w-7xl mx-auto px-6 pt-14 pb-10">
-    <div class="flex items-baseline justify-between border-b border-slate-200 pb-5">
-      <div>
-        <p class="font-label text-[10px] uppercase tracking-widest text-slate-400 mb-2">TheCocoa</p>
-        <h1 class="font-headline text-4xl font-extrabold tracking-tight text-brand-teal">所有分類</h1>
-      </div>
-      <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest hidden sm:block">依主題瀏覽報導</p>
-    </div>
-  </div>
-
-  <!-- TERMS GRID -->
-  <section class="max-w-7xl mx-auto px-6 pb-28">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {{ range .Data.Terms.Alphabetical }}
-      {{ $ck := index $colorMap .Page.Title | default "blue" }}
-      <a href="{{ .Page.RelPermalink }}" class="term-card group block p-6 border border-slate-100" style="border-radius:4px">
-        <div class="flex items-start justify-between">
-          <div class="space-y-3 flex-1">
-            {{ if eq $ck "teal" }}
-            <span class="inline-block px-2 py-0.5 bg-brand-teal text-white text-[9px] font-black font-label uppercase tracking-widest">{{ .Page.Title }}</span>
-            {{ else if eq $ck "coral" }}
-            <span class="inline-block px-2 py-0.5 bg-brand-coral text-white text-[9px] font-black font-label uppercase tracking-widest">{{ .Page.Title }}</span>
-            {{ else if eq $ck "yellow" }}
-            <span class="inline-block px-2 py-0.5 bg-brand-yellow text-brand-teal text-[9px] font-black font-label uppercase tracking-widest">{{ .Page.Title }}</span>
-            {{ else }}
-            <span class="inline-block px-2 py-0.5 bg-brand-blue text-brand-teal text-[9px] font-black font-label uppercase tracking-widest">{{ .Page.Title }}</span>
-            {{ end }}
-            <p class="font-headline text-2xl font-bold text-on-surface group-hover:text-brand-teal transition-colors">{{ len .Pages }} <span class="text-base font-medium text-slate-400">篇報導</span></p>
-            {{ with .Pages.ByDate.Reverse }}
-            {{ with index . 0 }}
-            <p class="font-body text-xs text-slate-400 leading-snug line-clamp-1">最新：{{ .Title }}</p>
-            {{ end }}
-            {{ end }}
-          </div>
-          <svg class="w-4 h-4 text-slate-300 group-hover:text-brand-teal transition-colors mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-      {{ end }}
+    <div class="ph-stats">
+      <div class="ph-stat"><span class="ph-stat-n">{{ len .Data.Terms }}</span><span class="ph-stat-lb">個分類</span></div>
     </div>
   </section>
 
-</main>
-
-<!-- FOOTER -->
-<footer class="bg-slate-50 border-t border-slate-100 py-16">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10">
-    <div class="md:col-span-4 space-y-4">
-      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
-      <p class="font-body text-sm text-slate-500 leading-relaxed max-w-xs">以數據為核心的獨立新聞媒體。每一個數字背後，都是一個值得說的故事。</p>
-      <p class="font-label text-xs text-slate-400">© {{ now.Year }} TheCocoa. All rights reserved.</p>
-    </div>
-    <div class="md:col-span-2 flex flex-col gap-3">
-      <span class="font-label text-[11px] font-bold uppercase tracking-widest text-brand-teal">報導</span>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "hot/" | relURL }}">熱門文章</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "latest/" | relURL }}">最新文章</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "categories/" | relURL }}">所有分類</a>
-    </div>
-    <div class="md:col-span-2 flex flex-col gap-3">
-      <span class="font-label text-[11px] font-bold uppercase tracking-widest text-brand-teal">關於</span>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "about/" | relURL }}">認識我們</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "contact/" | relURL }}">加入我們</a>
-      <a class="font-body text-sm text-slate-500 hover:text-brand-teal transition-colors" href="{{ "privacy/" | relURL }}">隱私政策</a>
-    </div>
-    <div class="md:col-span-4">
-      <div class="bg-white p-5 border border-slate-200" style="border-radius:4px">
-        <span class="font-label text-[10px] font-bold uppercase tracking-widest text-slate-400">系統狀態</span>
-        <div class="flex items-center gap-2 mt-3">
-          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          <span class="font-headline text-sm font-bold text-brand-teal">所有服務正常運行</span>
-        </div>
-        <div class="mt-2 font-label text-[10px] text-slate-400">資料來源：內政部、主計總處、台電</div>
-      </div>
-    </div>
+  <div class="topics">
+    {{ range .Data.Terms.ByCount }}
+    {{- $ck := index $colorMap .Page.Title | default "blue" -}}
+    <a class="topic" href="{{ .Page.RelPermalink }}">
+      <span class="topic-lb">{{ .Page.Title }}</span>
+      <span class="topic-n">{{ .Count }} Stories</span>
+    </a>
+    {{ end }}
   </div>
-</footer>
 
-</body>
-</html>
+</div>
+{{ end }}
