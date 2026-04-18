@@ -1,465 +1,251 @@
-{{- $related := .Site.RegularPages.Related . | first 3 -}}
-{{- $colorMap := dict
-      "科技社會" "secondary"  "城市發展" "secondary"
-      "環境氣候" "tertiary"   "人口議題" "tertiary"
-      "全球經濟" "primary"    "深度分析" "primary"   "居住正義" "primary"
-      "社會議題" "secondary"  "勞動市場" "secondary" "媒體觀察" "secondary" -}}
+{{ define "main" }}
+{{- $related   := .Site.RegularPages.Related . | first 3 -}}
+{{- $colorMap  := dict
+      "科技社會" "teal"  "城市發展" "teal"
+      "環境氣候" "coral" "人口議題" "coral"
+      "全球經濟" "yellow" "深度分析" "yellow" "居住正義" "yellow"
+      "社會議題" "blue"  "勞動市場" "blue"  "媒體觀察" "blue" -}}
 {{- $cat := .Params.category | default "報導" -}}
-{{- $ck  := index $colorMap $cat | default "secondary" -}}
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ .Title }} | TheCocoa</title>
-<meta name="description" content="{{ .Params.summary | default (.Summary | plainify | truncate 160) }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Space+Grotesk:wght@300..700&family=Manrope:wght@200..800&family=Work+Sans:wght@300..600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "secondary-container": "#a7eefb",
-        "on-secondary-container": "#206e7a",
-        "tertiary-container": "#804a4b",
-        "on-tertiary-container": "#ffc1c1",
-        "surface-container":        "#edeef0",
-        "surface-container-high":   "#e7e8ea",
-        "surface-container-highest":"#e2e2e4",
-        "surface-container-low":    "#f3f3f5",
-        "on-surface":               "#191c1d",
-        "on-surface-variant":       "#41484c",
-        "outline-variant":          "#c0c7cc",
-        "primary":                  "#0a475c",
-        "primary-container":        "#2b5f75",
-        "on-primary":               "#ffffff",
-        "secondary":                "#166873",
-        "tertiary":                 "#643335",
-        "background":               "#f9f9fb",
-        "surface":                  "#f9f9fb",
-        "inverse-surface":          "#2e3132",
-        "brand-teal":               "#2B5F75",
-        "brand-blue":               "#81C7D4",
-        "brand-coral":              "#EEA9A9",
-        "brand-yellow":             "#F7D94C",
-      },
-      fontFamily: {
-        headline: ["Space Grotesk","sans-serif"],
-        body:     ["Manrope","sans-serif"],
-        label:    ["Work Sans","sans-serif"],
-      },
-      borderRadius: {
-        DEFAULT: "0.125rem",
-        lg:  "0.25rem",
-        xl:  "0.5rem",
-        full:"0.75rem",
-      }
-    }
-  }
-}
-</script>
-<style>
-  *{box-sizing:border-box;}
-  body{font-family:'Manrope',sans-serif;background:#f9f9fb;color:#191c1d;}
-  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;}
+{{- $ck  := index $colorMap $cat | default "blue" -}}
 
-  /* Reading progress */
-  #reading-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:#2B5F75;z-index:100;transition:width .1s linear;}
+<div id="progress"></div>
 
-  /* ── Shortcode: dataviz ──────────────────────────── */
-  .sc-dataviz{background:#f3f3f5;padding:2rem;border-radius:.25rem;margin:2.5rem 0;}
-  .sc-dataviz-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
-  .sc-dataviz-title{font-family:'Work Sans',sans-serif;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:#0a475c;}
-  .sc-dataviz-icon{color:#166873;font-size:1.25rem;}
-  .sc-dataviz-body{display:flex;flex-direction:column;gap:1rem;}
-  .sc-dataviz-caption{margin-top:1rem;font-size:.75rem;color:#71787d;font-family:'Work Sans',sans-serif;font-style:italic;line-height:1.5;}
-
-  /* ── Shortcode: barrow ───────────────────────────── */
-  .sc-barrow{display:flex;flex-direction:column;gap:.35rem;}
-  .sc-barrow-meta{display:flex;align-items:baseline;gap:.5rem;}
-  .sc-barrow-label{font-family:'Work Sans',sans-serif;font-size:.75rem;font-weight:600;color:#41484c;flex:1;}
-  .sc-barrow-sub{font-size:.65rem;color:#71787d;font-family:'Work Sans',sans-serif;}
-  .sc-barrow-pct{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;color:#0a475c;min-width:2.5rem;text-align:right;}
-  .sc-barrow-track{height:.5rem;background:#e7e8ea;border-radius:99px;overflow:hidden;}
-  .sc-barrow-fill{height:100%;border-radius:99px;width:0;transition:width .8s cubic-bezier(.4,0,.2,1);}
-  .sc-barrow-primary{background:#0a475c;}
-  .sc-barrow-secondary{background:#166873;}
-  .sc-barrow-tertiary{background:#643335;}
-
-  /* ── Shortcode: statrow + stat ───────────────────── */
-  .sc-statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:#c0c7cc;border:1px solid #c0c7cc;border-radius:.25rem;overflow:hidden;margin:2.5rem 0;}
-  .sc-stat{display:flex;flex-direction:column;gap:.25rem;padding:1.5rem 1.25rem;background:#f9f9fb;}
-  .sc-stat-label{font-family:'Work Sans',sans-serif;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#41484c;}
-  .sc-stat-value{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1;color:#0a475c;}
-  .sc-stat-note{font-family:'Work Sans',sans-serif;font-size:.7rem;font-weight:500;color:#166873;}
-  .sc-stat-secondary .sc-stat-value{color:#166873;}
-  .sc-stat-tertiary  .sc-stat-value{color:#643335;}
-  .sc-stat-tertiary  .sc-stat-note{color:#643335;}
-
-  /* ── Shortcode: pullquote ────────────────────────── */
-  .sc-pullquote{position:relative;margin:3rem 0;padding:2rem 2rem 2rem 2.5rem;border-left:none;}
-  .sc-pullquote::before{content:'';position:absolute;left:0;top:.5rem;bottom:.5rem;width:3px;background:#2B5F75;}
-  .sc-pullquote-text{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:#0a475c;line-height:1.35;font-style:normal;margin:0 0 .75rem;}
-  .sc-pullquote-cite{display:block;font-family:'Work Sans',sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#41484c;font-style:normal;}
-
-  /* ── Shortcode: infobox ──────────────────────────── */
-  .sc-infobox{border:1px solid;border-radius:.25rem;padding:1.25rem 1.5rem;margin:2.5rem 0;}
-  .sc-infobox-teal  {border-color:#2B5F75;background:#f0f8fb;}
-  .sc-infobox-coral {border-color:#EEA9A9;background:#fff5f5;}
-  .sc-infobox-yellow{border-color:#F7D94C;background:#fffceb;}
-  .sc-infobox-blue  {border-color:#81C7D4;background:#f0fafc;}
-  .sc-infobox-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;}
-  .sc-infobox-icon{font-size:1.1rem;color:#2B5F75;}
-  .sc-infobox-coral  .sc-infobox-icon{color:#c47a7a;}
-  .sc-infobox-yellow .sc-infobox-icon{color:#b89a00;}
-  .sc-infobox-blue   .sc-infobox-icon{color:#166873;}
-  .sc-infobox-title{font-family:'Space Grotesk',sans-serif;font-size:.875rem;font-weight:700;color:#0a475c;}
-  .sc-infobox-body{font-size:.9375rem;color:#41484c;line-height:1.7;}
-  .sc-infobox-body p{margin:0;}
-
-  /* ── Shortcode: divider ──────────────────────────── */
-  .sc-divider{padding:2.5rem 0;border-top:1px solid #e7e8ea;border-bottom:1px solid #e7e8ea;margin:2.5rem 0;}
-  .sc-divider-heading{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;font-weight:700;color:#0a475c;margin:0;line-height:1.2;}
-
-  /* ── Legacy inline-HTML classes (existing posts) ──── */
-  /* dataviz container */
-  .dataviz{background:#f3f3f5;border-radius:.25rem;padding:2rem 2rem 1.5rem;margin:2.5rem 0;}
-  .dataviz-badge{display:inline-block;padding:.25rem .75rem;background:#a7eefb;color:#206e7a;font-family:'Work Sans',sans-serif;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border-radius:99px;margin-bottom:.75rem;}
-  .dataviz-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#0a475c;margin-bottom:.25rem;}
-  .dataviz-sub{font-family:'Work Sans',sans-serif;font-size:.75rem;color:#71787d;margin-bottom:1.5rem;}
-  .dataviz-source{font-family:'Work Sans',sans-serif;font-size:.7rem;color:#71787d;font-style:italic;margin-top:1.25rem;}
-  /* bar chart */
-  .bar-chart{display:flex;flex-direction:column;gap:.9rem;}
-  .bar-row{display:grid;grid-template-columns:8.5rem 1fr 3rem;align-items:center;gap:.75rem;}
-  .bar-label{font-family:'Manrope',sans-serif;font-size:.875rem;color:#41484c;white-space:nowrap;}
-  .bar-track{height:.5rem;background:#dfe1e3;border-radius:99px;overflow:hidden;}
-  .bar-fill{height:100%;border-radius:99px;transition:width .8s cubic-bezier(.4,0,.2,1);}
-  .bar-fill.blue  {background:#0a475c;}
-  .bar-fill.sky   {background:#166873;}
-  .bar-fill.lav   {background:#81C7D4;}
-  .bar-fill.yellow{background:#F7D94C;}
-  .bar-fill.dim   {background:#c0c7cc;}
-  .bar-val{font-family:'Space Grotesk',sans-serif;font-size:.8125rem;font-weight:700;color:#0a475c;text-align:right;}
-  /* pull-quote */
-  .pull-quote{position:relative;margin:2.5rem 0;padding:1.5rem 1.5rem 1.5rem 2.25rem;background:#f0f8fb;border-radius:.25rem;font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:#0a475c;line-height:1.4;font-style:normal;}
-  .pull-quote::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#2B5F75;border-radius:2px;}
-  .pull-quote cite{display:block;margin-top:.75rem;font-family:'Work Sans',sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#41484c;font-style:normal;}
-  /* stat-row / stat-box */
-  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:#c0c7cc;border:1px solid #c0c7cc;border-radius:.25rem;overflow:hidden;margin:2.5rem 0;}
-  .stat-box{display:flex;flex-direction:column;gap:.25rem;padding:1.25rem 1rem;background:#f9f9fb;}
-  .stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1;color:#0a475c;}
-  .stat-desc{font-family:'Work Sans',sans-serif;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#41484c;margin-top:.25rem;}
-
-  /* Article body typography */
-  .art-prose p{font-size:1.125rem;color:#41484c;line-height:2;margin-bottom:1.5rem;}
-  .art-prose p:first-of-type{font-size:1.25rem;font-weight:300;color:#0a475c;line-height:1.8;}
-  .art-prose p:first-of-type::first-letter{font-size:4.5rem;font-weight:800;font-family:'Space Grotesk',sans-serif;float:left;line-height:.85;margin-right:.5rem;margin-top:.1rem;color:#0a475c;}
-  .art-prose h2{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;font-weight:700;color:#0a475c;margin:2.5rem 0 1rem;line-height:1.2;}
-  .art-prose h3{font-family:'Space Grotesk',sans-serif;font-size:1.375rem;font-weight:700;color:#0a475c;margin:2rem 0 .75rem;}
-  .art-prose ul,
-  .art-prose ol{padding-left:1.5rem;margin-bottom:1.5rem;color:#41484c;font-size:1.05rem;line-height:1.9;}
-  .art-prose li{margin-bottom:.5rem;}
-  .art-prose blockquote{border-left:3px solid #2B5F75;padding-left:1.25rem;margin:2rem 0;color:#41484c;font-style:italic;font-size:1.2rem;line-height:1.7;}
-  .art-prose hr{border:none;border-top:1px solid #c0c7cc;margin:3rem 0;}
-  .art-prose a{color:#0a475c;text-decoration:underline;text-underline-offset:3px;}
-  .art-prose strong{color:#191c1d;font-weight:700;}
-  .art-prose img{width:100%;border-radius:.25rem;margin:2rem 0;}
-  .art-prose figure{margin:2.5rem 0;}
-  .art-prose figcaption{font-size:.8rem;color:#71787d;margin-top:.5rem;font-family:'Work Sans',sans-serif;}
-
-  /* ── Logo ──────────────────────────────────────── */
-  .tc-logo{display:inline-flex;align-items:center;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1;}
-  .tc-logo-sm{font-size:1.375rem;}
-  .tc-logo-lg{font-size:1.5rem;}
-</style>
-</head>
-<body class="antialiased selection:bg-secondary-container selection:text-on-secondary-container">
-<div id="reading-bar"></div>
-
-<!-- ── NAV ───────────────────────────────────────── -->
-<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/10">
-  <nav class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto h-16">
-    <div class="flex items-center gap-8">
-      <a href="{{ "" | relURL }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></a>
-      <div class="hidden md:flex items-center gap-6">
-        <a href="{{ "hot/" | relURL }}" class="text-slate-600 hover:text-primary label-font text-sm transition-colors">熱門</a>
-        <a href="{{ "latest/" | relURL }}" class="text-slate-600 hover:text-primary label-font text-sm transition-colors">最新</a>
-        {{ with .Params.category }}
-        <a href="/categories/{{ . | urlize }}/" class="text-primary border-b-2 border-primary pb-0.5 label-font text-sm font-semibold">{{ . }}</a>
-        {{ end }}
-        <a href="{{ "categories/" | relURL }}" class="text-slate-600 hover:text-primary label-font text-sm transition-colors">所有分類</a>
-      </div>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  {{ if .Params.image }}
+  <div class="hero-img">
+    <img src="{{ .Params.image }}" alt="{{ .Title }}">
+  </div>
+  {{ end }}
+  <div class="hero-body">
+    <div class="hero-badges">
+      <span class="cat-chip cat-{{ $ck }}">{{ $cat }}</span>
+      {{ with .Params.card_type }}<span class="cat-chip cat-ko">{{ . }}</span>{{ end }}
     </div>
-    <div class="flex items-center gap-2">
-      <button id="shareBtn" class="p-2 rounded-full hover:bg-slate-100 transition-colors text-primary" aria-label="分享">
-        <span class="material-symbols-outlined text-xl">share</span>
-      </button>
-      <a href="{{ "" | relURL }}" class="p-2 rounded-full hover:bg-slate-100 transition-colors text-primary" aria-label="回首頁">
-        <span class="material-symbols-outlined text-xl">home</span>
+    <h1 class="hero-ttl">{{ .Title }}</h1>
+    {{ with .Description }}<p class="hero-lede">{{ . }}</p>{{ end }}
+    <div class="hero-meta">
+      <span>{{ .Date.Format "2006.01.02" }}</span>
+      {{ with .Params.author }}<span class="hero-meta-dot"></span><span>By {{ . }}</span>{{ end }}
+      <span class="hero-meta-dot"></span><span>{{ .ReadingTime }} Min Read</span>
+      {{ with .Params.views }}<span class="hero-meta-dot"></span><span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
+    </div>
+  </div>
+  {{ with .Params.image_caption }}<p class="hero-cap">{{ . }}</p>{{ end }}
+</section>
+
+<!-- ═══ META BAR ═══ -->
+<div class="meta-bar">
+  <div class="byline">
+    {{ with .Params.author }}
+    <div class="byline-av">{{ . | truncate 1 "" }}</div>
+    <div>
+      <div class="byline-au">{{ . }}</div>
+      <div class="byline-sub">THE COCOA · 數據新聞</div>
+    </div>
+    {{ end }}
+  </div>
+  <div class="meta-r">
+    <button class="gh-btn" id="copyBtn" aria-label="複製連結">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>複製
+    </button>
+    <button class="gh-btn" id="shareBtn" aria-label="分享">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>分享
+    </button>
+  </div>
+</div>
+
+<!-- ═══ ARTICLE ═══ -->
+<div class="art-wrap">
+
+  <aside class="rail-l">
+    <div class="share-col">
+      <span class="share-lb">Share</span>
+      <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlize }}&text={{ .Title | urlize }}" target="_blank" rel="noopener" class="share-btn" aria-label="X">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlize }}" target="_blank" rel="noopener" class="share-btn" aria-label="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+      </a>
+      <button class="share-btn" id="copyBtnRail" aria-label="複製連結">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
     </div>
-  </nav>
-</header>
+    <nav class="toc" id="toc">
+      <span class="toc-lb">Contents</span>
+      {{- range .Fragments.Headings }}
+      <a href="#{{ .ID }}">{{ .Title }}</a>
+      {{- end }}
+    </nav>
+  </aside>
 
-<main class="pt-16">
-
-  <!-- ── HERO HEADER ───────────────────────────────── -->
-  <section class="max-w-7xl mx-auto px-6 pt-14 pb-12">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-      <div class="lg:col-span-8">
-        <div class="mb-6 flex gap-3 flex-wrap">
-          {{- if eq $ck "secondary" }}
-          <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-semibold rounded-full label-font uppercase tracking-wider">{{ $cat }}</span>
-          {{- else if eq $ck "tertiary" }}
-          <span class="px-3 py-1 bg-brand-coral/20 text-tertiary text-xs font-semibold rounded-full label-font uppercase tracking-wider">{{ $cat }}</span>
-          {{- else }}
-          <span class="px-3 py-1 bg-brand-yellow/30 text-primary text-xs font-semibold rounded-full label-font uppercase tracking-wider">{{ $cat }}</span>
-          {{- end }}
-          {{ with .Params.card_type }}
-          <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-semibold rounded-full label-font uppercase tracking-wider">{{ . }}</span>
-          {{ end }}
-        </div>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-headline font-extrabold text-primary tracking-tighter leading-[0.92] mb-8">
-          {{ .Title }}
-        </h1>
-        {{ with .Description }}
-        <p class="text-xl text-on-surface-variant font-light leading-relaxed max-w-2xl mt-4">{{ . }}</p>
-        {{ end }}
-      </div>
-      <div class="lg:col-span-4 pb-4">
-        <div class="flex flex-col gap-1 border-l-2 border-primary pl-6">
-          {{ with .Params.author }}
-          <p class="label-font text-sm font-bold text-primary uppercase">BY {{ . }}</p>
-          {{ end }}
-          <p class="label-font text-xs text-on-surface-variant">{{ .Date.Format "2006 年 1 月 2 日" }}</p>
-          <p class="label-font text-xs text-on-surface-variant italic">{{ .ReadingTime }} MIN READ</p>
-          {{ with .Params.views }}<p class="label-font text-xs text-on-surface-variant">{{ . | humanize }} 次閱讀</p>{{ end }}
-        </div>
-      </div>
+  <article class="art">
+    {{ with .Params.summary }}<p class="art-lede">{{ . }}</p>{{ end }}
+    <div class="art-prose">
+      {{ .Content }}
     </div>
-  </section>
 
-  <!-- ── HERO IMAGE ────────────────────────────────── -->
-  {{ with .Params.image }}
-  <section class="w-full mb-16 px-6">
-    <div class="max-w-7xl mx-auto overflow-hidden h-[520px] relative group" style="border-radius:.25rem">
-      <img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" src="{{ . }}" alt="{{ $.Title }}">
-      <div class="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent"></div>
-      {{ with $.Params.image_caption }}
-      <div class="absolute bottom-8 left-8 text-white max-w-lg">
-        <p class="text-sm font-medium label-font opacity-80">{{ . }}</p>
-      </div>
+    <!-- Tags -->
+    {{ if or .Params.category .Params.tags }}
+    <div class="art-tags">
+      {{ with .Params.category }}
+      <a class="art-tag cat" href="{{ "categories/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+      {{ end }}
+      {{ range .Params.tags }}
+      <a class="art-tag" href="{{ "tags/" | relURL }}{{ . | urlize }}/"># {{ . }}</a>
       {{ end }}
     </div>
-  </section>
-  {{ end }}
+    {{ end }}
 
-  <!-- ── ARTICLE BODY + SIDEBAR ────────────────────── -->
-  <section class="max-w-7xl mx-auto px-6 mb-20">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-
-      <!-- MAIN CONTENT -->
-      <article class="lg:col-span-7 lg:col-start-2">
-        {{ with .Params.summary }}
-        <p class="text-2xl font-light text-primary leading-relaxed mb-10 border-b border-outline-variant/20 pb-10">{{ . }}</p>
-        {{ end }}
-        <div class="art-prose">
-          {{ .Content }}
-        </div>
-
-        <!-- Tags -->
-        {{ if or .Params.category .Params.tags }}
-        <div class="flex flex-wrap gap-2 mt-12 pt-8 border-t border-outline-variant/20">
-          {{ with .Params.category }}
-          <a href="/categories/{{ . | urlize }}/" class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs font-label font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-colors" style="border-radius:.125rem">{{ . }}</a>
-          {{ end }}
-          {{ range .Params.tags }}
-          <a href="/tags/{{ . | urlize }}/" class="px-3 py-1 border border-outline-variant text-on-surface-variant text-xs font-label uppercase tracking-wider hover:border-primary hover:text-primary transition-colors" style="border-radius:.125rem"># {{ . }}</a>
-          {{ end }}
-        </div>
-        {{ end }}
-      </article>
-
-      <!-- SIDEBAR -->
-      <aside class="lg:col-span-3 space-y-10">
-
-        <!-- Key data stats (from front matter) -->
-        {{ with .Params.stats }}
-        <div class="bg-surface-container-low p-6" style="border-radius:.25rem">
-          <h4 class="font-headline font-bold text-primary mb-6 text-xl">關鍵數據</h4>
-          <div class="space-y-6">
-            {{ range . }}
-            <div class="flex flex-col">
-              {{ with .label }}<span class="label-font text-xs text-on-surface-variant uppercase font-bold tracking-tighter">{{ . }}</span>{{ end }}
-              {{ with .value }}<span class="text-3xl font-headline font-extrabold text-primary">{{ . }}</span>{{ end }}
-              {{ with .note }}<p class="text-xs text-secondary font-medium">{{ . }}</p>{{ end }}
-            </div>
-            {{ end }}
-          </div>
-        </div>
-        {{ end }}
-
-        <!-- Author bio -->
-        {{ with .Params.author }}
-        <div class="pt-6">
-          <div class="w-12 h-1 bg-primary mb-4"></div>
-          <p class="label-font text-sm font-bold text-primary uppercase">{{ . }}</p>
-          {{ with $.Params.author_bio }}
-          <p class="text-sm text-on-surface-variant leading-relaxed mt-2">{{ . }}</p>
-          {{ end }}
-        </div>
-        {{ end }}
-
-        <!-- Subscribe CTA -->
-        <div class="bg-primary p-6 text-white flex flex-col gap-4" style="border-radius:.25rem">
-          <h5 class="font-headline font-bold text-lg leading-tight">數據洞察，直達收件匣</h5>
-          <p class="text-xs text-white/70 font-label leading-relaxed">每週精選台灣與全球重要數據故事，免費訂閱。</p>
-          <a href="#newsletter" class="inline-block bg-white text-primary px-5 py-2 font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary-container hover:text-on-secondary-container transition-colors text-center">立即訂閱</a>
-        </div>
-
-        <!-- Share -->
-        <div class="space-y-4 pt-4">
-          <p class="label-font text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">分享這篇</p>
-          <div class="flex gap-3">
-            <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlize }}&text={{ .Title | urlize }}" target="_blank" rel="noopener" class="p-2.5 border border-outline-variant hover:border-primary hover:text-primary text-on-surface-variant transition-colors" style="border-radius:.125rem">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlize }}" target="_blank" rel="noopener" class="p-2.5 border border-outline-variant hover:border-primary hover:text-primary text-on-surface-variant transition-colors" style="border-radius:.125rem">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <button id="copyLink" class="p-2.5 border border-outline-variant hover:border-primary hover:text-primary text-on-surface-variant transition-colors" style="border-radius:.125rem" aria-label="複製連結">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            </button>
-          </div>
-        </div>
-
-      </aside>
-    </div>
-  </section>
-
-  <!-- ── RELATED ARTICLES ──────────────────────────── -->
-  {{ with $related }}
-  <section class="max-w-7xl mx-auto px-6 mb-20">
-    <div class="border-t border-outline-variant/20 pt-12">
-      <p class="label-font text-[10px] font-bold uppercase tracking-[.2em] text-on-surface-variant mb-8">延伸閱讀</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {{ range . }}
-        {{ $rcat := .Params.category | default "報導" }}
-        <a href="{{ or .Params.externalUrl .RelPermalink }}" class="group block">
-          <div class="aspect-[4/3] bg-surface-container overflow-hidden mb-4" style="border-radius:.25rem">
-            {{ if .Params.image }}
-            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
-            {{ else }}
-            <div class="w-full h-full flex items-center justify-center">
-              <span class="font-headline text-3xl font-black text-outline-variant/30">TC</span>
-            </div>
-            {{ end }}
-          </div>
-          <p class="label-font text-[9px] font-bold uppercase tracking-widest text-secondary mb-2">{{ $rcat }}</p>
-          <h3 class="font-headline text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">{{ .Title }}</h3>
-          <p class="label-font text-xs text-on-surface-variant mt-2">{{ .Date.Format "2006年1月2日" }}</p>
-        </a>
-        {{ end }}
+    <!-- Author footer -->
+    {{ with .Params.author }}
+    <div class="art-foot">
+      <div class="av">{{ . | truncate 1 "" }}</div>
+      <div>
+        <div class="art-foot-au">{{ . }}</div>
+        {{ with $.Params.author_bio }}<p class="art-foot-bio">{{ . }}</p>{{ end }}
       </div>
     </div>
-  </section>
-  {{ end }}
+    {{ end }}
+  </article>
 
-  <!-- ── NEWSLETTER ─────────────────────────────────── -->
-  <section id="newsletter" class="w-full bg-surface-container-low py-20">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <span class="label-font text-xs font-bold text-secondary tracking-[.2em] uppercase mb-4 block">Briefings for the Informed</span>
-      <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-8 tracking-tighter">深入淺出的數據洞察，直達收件匣</h2>
-      <div class="flex flex-col sm:flex-row gap-4 items-center max-w-xl mx-auto">
-        <input type="email" placeholder="您的電子郵件地址" class="w-full bg-white border-none px-6 py-4 label-font focus:ring-2 focus:ring-primary outline-none" style="border-radius:.125rem">
-        <button class="w-full sm:w-auto bg-primary text-white px-10 py-4 font-label font-bold uppercase tracking-widest hover:bg-primary-container transition-colors whitespace-nowrap" style="border-radius:.125rem">訂閱週報</button>
-      </div>
-      <p class="mt-6 text-xs text-on-surface-variant label-font opacity-60">我們承諾不發送垃圾郵件。您可以隨時取消訂閱。</p>
-    </div>
-  </section>
+  <aside></aside>
+</div>
 
-</main>
-
-<!-- ── FOOTER ─────────────────────────────────────── -->
-<footer class="w-full mt-0 bg-slate-50">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 py-12 max-w-7xl mx-auto">
-    <div class="space-y-6">
-      <span class="tc-logo tc-logo-lg"><span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span></span>
-      <p class="text-slate-500 max-w-md font-body text-sm leading-relaxed">透過數據架構重新定義新聞美學。我們致力於提供最具深度與視覺震撼力的全球趨勢分析。</p>
-    </div>
-    <div class="grid grid-cols-2 gap-8">
-      <div class="space-y-4">
-        <h4 class="text-xs font-bold text-primary uppercase tracking-widest label-font">報導</h4>
-        <ul class="space-y-2">
-          <li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="{{ "hot/" | relURL }}">熱門文章</a></li>
-          <li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="{{ "latest/" | relURL }}">最新文章</a></li>
-          <li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="{{ "categories/" | relURL }}">所有分類</a></li>
-        </ul>
-      </div>
-      <div class="space-y-4">
-        <h4 class="text-xs font-bold text-primary uppercase tracking-widest label-font">關於</h4>
-        <ul class="space-y-2">
-          <li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">認識我們</a></li>
-          <li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">隱私政策</a></li>
-        </ul>
-      </div>
-    </div>
+<!-- ═══ RELATED + NEWSLETTER ═══ -->
+{{ with $related }}
+<section class="rel-wrap">
+  <div class="rel-head">
+    <h2 class="rel-ttl">延伸閱讀</h2>
+    <span class="rel-sub">Related · 同主題報導</span>
   </div>
-  <div class="border-t border-outline-variant/20 px-8 py-6 max-w-7xl mx-auto flex justify-between items-center">
-    <p class="text-slate-500 font-body text-xs">© {{ now.Year }} TheCocoa Editorial Intelligence. All rights reserved.</p>
-    <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-      <span class="text-[10px] uppercase font-bold text-on-surface-variant label-font tracking-tighter">System Normal / Data Live</span>
-    </div>
+  <div class="rel-grid">
+    {{ range . }}
+    {{- $rcat := .Params.category | default "報導" -}}
+    {{- $rck  := index $colorMap $rcat | default "blue" -}}
+    <a class="rel-card" href="{{ or .Params.externalUrl .RelPermalink }}">
+      <div class="rel-img">
+        {{ if .Params.image }}<img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">{{ end }}
+      </div>
+      <span class="cat-chip cat-{{ $rck }}" style="align-self:flex-start">{{ $rcat }}</span>
+      <h3 class="rel-ttl2">{{ .Title }}</h3>
+      <span class="rel-meta">
+        <span>{{ .Date.Format "2006.01.02" }}</span>
+        {{ with .Params.views }}<span class="rel-meta-dot"></span><span>{{ . | lang.FormatNumber 0 }} 次閱讀</span>{{ end }}
+      </span>
+    </a>
+    {{ end }}
   </div>
-</footer>
 
+  <section class="band" id="newsletter">
+    <div>
+      <div class="band-kicker">Briefings for the Informed</div>
+      <h2 class="band-ttl">為思考者準備的<br>簡報。</h2>
+      <p class="band-sub">每週日早晨，一封信。<br>精選本週最值得閱讀的數據報導，沒有廢話，沒有追蹤。</p>
+    </div>
+    <div>
+      <form class="band-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='已訂閱 ✓'">
+        <input type="email" placeholder="您的 Email 地址" required>
+        <button type="submit">訂閱</button>
+      </form>
+      <div class="band-assure">不追蹤 · 不轉售 · 隨時退訂</div>
+    </div>
+  </section>
+</section>
+{{ else }}
+<section class="band" id="newsletter">
+  <div>
+    <div class="band-kicker">Briefings for the Informed</div>
+    <h2 class="band-ttl">為思考者準備的<br>簡報。</h2>
+    <p class="band-sub">每週日早晨，一封信。<br>精選本週最值得閱讀的數據報導，沒有廢話，沒有追蹤。</p>
+  </div>
+  <div>
+    <form class="band-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='已訂閱 ✓'">
+      <input type="email" placeholder="您的 Email 地址" required>
+      <button type="submit">訂閱</button>
+    </form>
+    <div class="band-assure">不追蹤 · 不轉售 · 隨時退訂</div>
+  </div>
+</section>
+{{ end }}
+
+<!-- ═══ FLOAT SHARE ═══ -->
+<div class="float-share" id="floatShare">
+  <button class="share-btn" id="floatShareBtn" aria-label="分享">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+  <button class="share-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到頂端">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
 <script>
+(function(){
   // Reading progress bar
-  const bar = document.getElementById('reading-bar');
-  const article = document.querySelector('.art-prose');
-  if (bar && article) {
-    window.addEventListener('scroll', () => {
-      const rect = article.getBoundingClientRect();
-      const top = rect.top + window.scrollY;
-      const h = article.offsetHeight;
-      const progress = Math.min(Math.max((window.scrollY - top) / h, 0), 1);
-      bar.style.width = (progress * 100) + '%';
+  var prog = document.getElementById('progress');
+  var art  = document.querySelector('.art-prose');
+  if (prog && art) {
+    window.addEventListener('scroll', function(){
+      var rect = art.getBoundingClientRect();
+      var top  = rect.top + window.scrollY;
+      var h    = art.offsetHeight;
+      var pct  = Math.min(Math.max((window.scrollY - top) / h, 0), 1);
+      prog.style.width = (pct * 100) + '%';
     });
   }
 
-  // Copy link
-  const copyBtn = document.getElementById('copyLink');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        copyBtn.style.color = '#0a475c';
-        setTimeout(() => copyBtn.style.color = '', 1500);
-      });
+  // Copy link buttons
+  function copyLink(btn) {
+    navigator.clipboard.writeText(window.location.href).then(function(){
+      var orig = btn.innerHTML;
+      btn.style.color = 'var(--tc-teal)';
+      setTimeout(function(){ btn.style.color = ''; btn.innerHTML = orig; }, 1500);
     });
   }
+  var cb = document.getElementById('copyBtn');
+  if (cb) cb.addEventListener('click', function(){ copyLink(this); });
+  var cbr = document.getElementById('copyBtnRail');
+  if (cbr) cbr.addEventListener('click', function(){ copyLink(this); });
 
-  // Share button (mobile native or show panel)
-  const shareBtn = document.getElementById('shareBtn');
-  if (shareBtn && navigator.share) {
-    shareBtn.addEventListener('click', () => {
+  // Native share
+  var shareBtn = document.getElementById('shareBtn');
+  var floatShareBtn = document.getElementById('floatShareBtn');
+  function doShare() {
+    if (navigator.share) {
       navigator.share({ title: document.title, url: window.location.href });
-    });
+    }
   }
+  if (shareBtn) shareBtn.addEventListener('click', doShare);
+  if (floatShareBtn) floatShareBtn.addEventListener('click', doShare);
 
-  // Scroll-triggered data bar animations
-  document.querySelectorAll('[data-bar]').forEach(el => {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
+  // Scroll-triggered bar animations
+  document.querySelectorAll('[data-bar]').forEach(function(el){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
         if (e.isIntersecting) { el.style.width = el.dataset.bar; io.unobserve(el); }
       });
     }, { threshold: .2 });
     el.style.width = '0';
     io.observe(el);
   });
+
+  // Active TOC link on scroll
+  var tocLinks = document.querySelectorAll('.toc a');
+  if (tocLinks.length) {
+    var headings = Array.from(document.querySelectorAll('.art h2[id], .art h3[id]'));
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY + 80;
+      var cur = headings.filter(function(h){ return h.offsetTop <= y; }).pop();
+      tocLinks.forEach(function(a){ a.classList.remove('on'); });
+      if (cur) {
+        var active = document.querySelector('.toc a[href="#' + cur.id + '"]');
+        if (active) active.classList.add('on');
+      }
+    });
+  }
+})();
 </script>
-</body>
-</html>
+{{ end }}

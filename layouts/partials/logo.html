@@ -1,16 +1,14 @@
-{{- /*
-  logo.html — the thecocoa wordmark
-  Usage inside a template:  {{ partial "logo.html" (dict "href" ("" | relURL) "size" "lg") }}
-  size: "sm" (nav) | "lg" (footer)
-*/ -}}
 {{- $href := .href | default "/" -}}
 {{- $size  := .size  | default "sm" -}}
-{{- if eq $size "lg" -}}
-<a href="{{ $href }}" class="tc-logo tc-logo-lg" aria-label="TheCocoa">
-  <span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span>
+<a href="{{ $href }}" class="logo{{ if eq $size "lg" }} logo-lg{{ end }}" aria-label="THE COCOA">
+  <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+    <rect width="64" height="64" rx="10" fill="#FFFFFF" stroke="var(--tc-surface-200)"/>
+    <circle cx="46" cy="22" r="5" fill="var(--tc-yellow)"/>
+    <path d="M10 50 L26 28 L38 42 L46 34 L56 50 Z" fill="var(--tc-teal)"/>
+    <path d="M10 50 L18 40 L24 50 Z" fill="var(--tc-coral)"/>
+    <path d="M26 28 L32 36 L28 42 L22 34 Z" fill="var(--tc-blue)" opacity=".55"/>
+  </svg>
+  <span class="logo-wm">
+    <span class="l1">t</span><span class="l2">h</span><span class="l3">e</span><span class="l4">c</span><span class="l5">o</span><span class="l6">c</span><span class="l7">o</span><span class="l8">a</span>
+  </span>
 </a>
-{{- else -}}
-<a href="{{ $href }}" class="tc-logo tc-logo-sm" aria-label="TheCocoa">
-  <span style="color:#2B5F75">the</span><span style="color:#2B5F75">c</span><span style="color:#E07B5E">o</span><span style="color:#81C7D4">c</span><span style="color:#2B5F75">o</span><span style="color:#E07B5E">a</span>
-</a>
-{{- end -}}
