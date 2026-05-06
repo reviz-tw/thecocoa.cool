@@ -1,14 +1,13 @@
 {{- $href := .href | default "/" -}}
 {{- $size  := .size  | default "sm" -}}
-<a href="{{ $href }}" class="logo{{ if eq $size "lg" }} logo-lg{{ end }}" aria-label="THE COCOA">
-  <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
-    <rect width="64" height="64" rx="10" fill="#FFFFFF" stroke="var(--tc-surface-200)"/>
-    <circle cx="46" cy="22" r="5" fill="var(--tc-yellow)"/>
-    <path d="M10 50 L26 28 L38 42 L46 34 L56 50 Z" fill="var(--tc-teal)"/>
-    <path d="M10 50 L18 40 L24 50 Z" fill="var(--tc-coral)"/>
-    <path d="M26 28 L32 36 L28 42 L22 34 Z" fill="var(--tc-blue)" opacity=".55"/>
-  </svg>
-  <span class="logo-wm">
-    <span class="l1">t</span><span class="l2">h</span><span class="l3">e</span><span class="l4">c</span><span class="l5">o</span><span class="l6">c</span><span class="l7">o</span><span class="l8">a</span>
+<a href="{{ $href }}" class="logo{{ if eq $size "lg" }} logo-lg{{ end }}" aria-label="thecocoa.cool">
+  <span class="logo-mark" aria-hidden="true">
+    <svg viewBox="-4 -4 77.28 64" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="13.86,0 27.71,8 27.71,24 13.86,32 0,24 0,8"   fill="#00C2FF" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="41.57,0 55.43,8 55.43,24 41.57,32 27.71,24 27.71,8"  fill="#FFD400" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="27.71,24 41.57,32 41.57,48 27.71,56 13.86,48 13.86,32" fill="#FF2E88" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="55.43,24 69.28,32 69.28,48 55.43,56 41.57,48 41.57,32" fill="#6FE83A" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+    </svg>
   </span>
+  <span class="logo-wm">thecocoa<span class="logo-dot">.</span>cool</span>
 </a>
